@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>hikemu</title>
+    <meta name="description" content="computers used to feel like magic. hikemu's corner of the internet: music, linux, games and weird little things." />
+    <meta name="theme-color" content="#0d111b" />
+    <meta name="color-scheme" content="dark" />
+    <meta property="og:title" content="hikemu" />
+    <meta property="og:description" content="computers used to feel like magic." />
+    <meta property="og:type" content="profile" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="@nothikemu" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://api.lanyard.rest" crossorigin />
+    <link rel="preconnect" href="https://cdn.discordapp.com" />
+    <script type="module" src="/src/main.ts"></script>
+  </head>
+  <body>
+    <a class="skip" href="#main">skip to content</a>
+    <div class="grain" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a class="brand mono" href="/" data-link aria-label="hikemu, home">
+        <span class="brand-dot" data-status-dot data-status="offline" aria-hidden="true"></span>
+        <span>hikemu</span><span class="brand-tld">.me</span>
+      </a>
+      <nav class="nav" aria-label="Primary">
+        <span class="nav-pill" aria-hidden="true"></span>
+        <a href="/" data-link data-route="home">Home</a>
+        <a href="/craft" data-link data-route="craft">Craft</a>
+        <a href="/more" data-link data-route="more">More</a>
+      </nav>
+    </header>
+
+    <main id="main" tabindex="-1">
+      <!-- ============================== HOME ============================== -->
+      <section class="view" data-view="home" aria-labelledby="home-title">
+        <h1 class="sr-only" id="home-title" tabindex="-1">hikemu</h1>
+
+        <div class="row row-top">
+          <!-- profile -->
+          <article class="card profile" aria-label="Profile">
+            <div class="banner" aria-hidden="true">
+              <svg class="banner-art" viewBox="0 0 600 200" preserveAspectRatio="xMidYMid slice">
+                <defs>
+                  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#1b2335" />
+                    <stop offset="1" stop-color="#121826" />
+                  </linearGradient>
+                  <radialGradient id="moonFill" cx=".35" cy=".35" r=".8">
+                    <stop offset="0" stop-color="#eef1f6" />
+                    <stop offset="1" stop-color="#8f9bb0" />
+                  </radialGradient>
+                  <radialGradient id="halo" cx=".5" cy=".5" r=".5">
+                    <stop offset="0" stop-color="#c9d3e6" stop-opacity=".16" />
+                    <stop offset="1" stop-color="#c9d3e6" stop-opacity="0" />
+                  </radialGradient>
+                  <pattern id="dots" width="6" height="6" patternUnits="userSpaceOnUse">
+                    <circle cx="3" cy="3" r=".9" fill="#fff" />
+                  </pattern>
+                  <linearGradient id="dotFade" x1="1" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#fff" stop-opacity=".9" />
+                    <stop offset=".75" stop-color="#fff" stop-opacity="0" />
+                  </linearGradient>
+                  <mask id="dotMask"><rect width="600" height="200" fill="url(#dotFade)" /></mask>
+                  <mask id="crescent">
+                    <circle cx="470" cy="70" r="40" fill="#fff" />
+                    <circle cx="452" cy="58" r="36" fill="#000" />
+                  </mask>
+                </defs>
+                <rect width="600" height="200" fill="url(#sky)" />
+                <rect width="600" height="200" fill="url(#dots)" opacity=".07" mask="url(#dotMask)" />
+                <g class="layer-far">
+                  <circle cx="470" cy="70" r="90" fill="url(#halo)" />
+                  <circle cx="470" cy="70" r="40" fill="url(#moonFill)" mask="url(#crescent)" opacity=".92" />
+                  <g fill="#dfe5f0">
+                    <circle cx="380" cy="34" r="1" opacity=".7" />
+                    <circle cx="545" cy="128" r="1.1" opacity=".5" />
+                    <circle cx="300" cy="22" r=".8" opacity=".5" />
+                    <circle cx="566" cy="30" r=".9" opacity=".6" />
+                    <circle cx="244" cy="54" r=".7" opacity=".4" />
+                    <circle cx="410" cy="120" r=".8" opacity=".35" />
+                    <path class="twinkle" d="M352 82c.3 3.4 1.8 5 5.2 5.4v.2c-3.4.4-4.9 2-5.2 5.4h-.2c-.3-3.4-1.8-5-5.2-5.4v-.2c3.4-.4 4.9-2 5.2-5.4z" />
+                    <path class="twinkle t2" d="M532 76c.2 2.3 1.2 3.4 3.5 3.6v.2c-2.3.2-3.3 1.3-3.5 3.6h-.2c-.2-2.3-1.2-3.4-3.5-3.6v-.2c2.3-.2 3.3-1.3 3.5-3.6z" />
+                  </g>
+                  <text x="586" y="186" text-anchor="end" class="hex">6d 61 67 69 63</text>
+                </g>
+                <g class="layer-near" fill="none" stroke="#090c14" stroke-linecap="round">
+                  <path d="M-10 66 Q 70 92 131 61" stroke-width="1.4" />
+                  <path d="M-10 84 Q 74 104 137 77" stroke-width="1.2" />
+                  <path d="M178 61 Q 390 108 620 50" stroke-width="1.4" />
+                  <path d="M172 77 Q 384 122 620 70" stroke-width="1.2" />
+                  <path d="M178 61 Q 300 70 620 112" stroke-width="1" opacity=".7" />
+                  <g fill="#090c14" stroke="none">
+                    <rect x="150" y="38" width="7" height="180" rx="1" />
+                    <rect x="126" y="56" width="56" height="5" rx="1" />
+                    <rect x="132" y="73" width="44" height="4" rx="1" />
+                    <rect x="129" y="50" width="3" height="7" rx="1" />
+                    <rect x="176" y="50" width="3" height="7" rx="1" />
+                    <rect x="140" y="88" width="10" height="16" rx="2" />
+                  </g>
+                </g>
+              </svg>
+              <img class="banner-img" data-banner alt="" decoding="async" hidden />
+              <span class="banner-tag mono">/home/hikemu</span>
+            </div>
+
+            <div class="profile-body">
+              <div class="avatar-wrap">
+                <img
+                  class="avatar"
+                  data-avatar
+                  src="https://github.com/nothikemu.png?size=192"
+                  alt="hikemu's avatar"
+                  width="92"
+                  height="92"
+                  decoding="async"
+                  fetchpriority="high"
+                />
+                <img class="avatar-deco" data-avatar-deco alt="" width="110" height="110" hidden />
+                <span class="status-dot" data-status-dot data-status="offline" role="img" aria-label="Discord status: offline"></span>
+              </div>
+
+              <div class="clock-wrap">
+                <div class="chip mono clock" title="hikemu's local time">
+                  <span class="ico" data-icon="clock"></span>
+                  <time data-clock>--:--</time>
+                </div>
+                <span class="tz mono" data-tz></span>
+              </div>
+
+              <h2 class="name">
+                <span data-display-name>hikemu</span>
+                <span class="name-deco" aria-hidden="true">⌁ ✦</span>
+              </h2>
+              <p class="handle mono">
+                <span>@nothikemu</span>
+                <span class="platforms" data-platforms aria-label="Active on"><span class="ico" data-icon="monitor"></span></span>
+              </p>
+
+              <div class="custom-status" data-custom-status hidden></div>
+
+              <p class="bio">
+                <span class="motto">computers used to feel like magic.</span>
+                i make things, break things, fix things, and spend probably too much time on the internet.
+              </p>
+
+              <div class="activity" data-activity aria-live="polite"></div>
+            </div>
+          </article>
+
+          <!-- now playing -->
+          <div class="now-col">
+            <article class="card now" data-now data-state="idle" aria-labelledby="now-title">
+              <header class="card-head">
+                <h2 id="now-title"><span class="ico spotify-ico" data-icon="spotify"></span>Listening to Spotify</h2>
+                <span class="live mono" data-now-live hidden>
+                  <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+                  <span data-now-source>live</span>
+                </span>
+              </header>
+              <div class="now-body">
+                <a class="art" data-now-link tabindex="-1" aria-hidden="true">
+                  <span class="art-empty" data-icon="image"></span>
+                  <img data-now-art alt="" width="120" height="120" decoding="async" hidden />
+                </a>
+                <div class="now-info">
+                  <p class="now-title"><a data-now-title-link><span data-now-title>Not listening</span></a></p>
+                  <p class="now-sub" data-now-sub>No song currently playing.</p>
+                  <p class="now-album mono" data-now-album></p>
+                  <div class="progress" data-now-progress hidden>
+                    <div class="bar" role="progressbar" aria-label="Playback progress" aria-valuemin="0" aria-valuemax="100" data-now-bar>
+                      <span class="fill" data-now-fill></span>
+                    </div>
+                    <div class="times mono"><span data-now-elapsed>0:00</span><span data-now-duration>0:00</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="zzz" aria-hidden="true"><span>z</span><span>z</span><span>Z</span></div>
+              <p class="sr-only" aria-live="polite" data-now-announce></p>
+            </article>
+          </div>
+        </div>
+
+        <div class="row row-bottom">
+          <!-- about -->
+          <article class="card about" aria-labelledby="about-title">
+            <span class="watermark" aria-hidden="true">✦</span>
+            <header class="card-head">
+              <h2 id="about-title">About Me</h2>
+              <ul class="socials" aria-label="Elsewhere" data-socials></ul>
+            </header>
+
+            <section class="about-block">
+              <h3>Who am I?</h3>
+              <p>
+                i'm <span class="me">hikemu</span> — i like computers, programming, music, linux, games, and making weird little
+                things on the internet.
+                <span class="aside mono">// probably on linux right now</span>
+              </p>
+            </section>
+
+            <hr />
+
+            <section class="about-block">
+              <h3>My Interests <span class="heart" aria-hidden="true">&lt;3</span></h3>
+              <p>
+                i really like computers. not "tech" — <em>computers</em>: the ones that hum, boot, break, and occasionally do
+                something that still feels like a magic trick. also games, music, and wasting <span class="dim">(all of my)</span>
+                time on the internet <span class="smile">:3</span>
+              </p>
+              <ul class="interests" aria-label="Interests">
+                <li data-note="they used to feel like magic"><span aria-hidden="true">▣</span>computers</li>
+                <li data-note="yes, btw"><span aria-hidden="true">$</span>linux</li>
+                <li data-note="mostly random things"><span aria-hidden="true">{}</span>programming</li>
+                <li data-note="screwdriver: owned"><span aria-hidden="true">⏚</span>hardware</li>
+                <li data-note="backlog &gt; free time"><span aria-hidden="true">▶</span>gaming</li>
+                <li data-note="see the list →"><span aria-hidden="true">♪</span>music</li>
+                <li data-note="too much of it"><span aria-hidden="true">@</span>the internet</li>
+                <li data-note="if it boots, it ships"><span aria-hidden="true">~</span>experimenting</li>
+              </ul>
+            </section>
+
+            <hr />
+
+            <div class="about-foot">
+            <div class="buttons" aria-label="88x31 buttons">
+              <span class="b88 b-site" title="you are here"><b>hkmu</b><i>.me</i></span>
+              <span class="b88 b-linux" title="linux inside"><i>powered by</i><b>LINUX</b></span>
+              <span class="b88 b-magic" title="computers used to feel like magic"><b>✦ magic</b><i>inside</i></span>
+              <span class="b88 b-lanyard" data-b-lanyard title="discord presence via lanyard"><i>lanyard</i><b data-b-lanyard-state>● ···</b></span>
+              <span class="b88 b-cookie" title="no cookies, no analytics, no trackers"><b>NO</b><i>cookies</i></span>
+              <span class="b88 b-view" title="any browser is fine honestly"><i>best viewed w/</i><b>EYES</b></span>
+              <span class="b88 b-html" title="vanilla typescript, no framework"><b>&lt;/&gt;</b><i>no framework</i></span>
+              <span class="b88 b-cat" title="the cat stays"><b>=^.^=</b><i>cat approved</i></span>
+            </div>
+            <p class="here mono" title="time you've spent on this page">you've been here<b data-here>00:00</b></p>
+            </div>
+          </article>
+
+          <!-- recent streams -->
+          <article class="card streams" aria-labelledby="streams-title">
+            <div class="mascot" data-mascot data-playing="false" aria-hidden="true">
+              <svg viewBox="96 14 172 190" width="172" height="190">
+                <ellipse cx="184" cy="201" rx="70" ry="3" fill="#000" opacity=".35" />
+                <!-- crt -->
+                <path d="M234 94 L256 102 L256 176 L234 184 Z" fill="#191f2c" stroke="#384156" stroke-width="1.2" stroke-linejoin="round" />
+                <rect x="150" y="186" width="46" height="8" rx="2" fill="#262d3d" />
+                <rect x="134" y="193" width="78" height="8" rx="3" fill="#2c3445" stroke="#384156" stroke-width="1" />
+                <rect x="110" y="88" width="126" height="100" rx="12" fill="#232a39" stroke="#3a4357" stroke-width="1.4" />
+                <rect x="123" y="100" width="92" height="70" rx="9" fill="#0a0e17" stroke="#2f374a" />
+                <rect x="123" y="100" width="92" height="70" rx="9" fill="url(#scan)" opacity=".9" />
+                <defs>
+                  <pattern id="scan" width="4" height="3" patternUnits="userSpaceOnUse">
+                    <rect width="4" height="1" fill="#9fb4d6" opacity=".05" />
+                  </pattern>
+                </defs>
+                <g class="crt-text" font-family="JetBrains Mono Variable, ui-monospace, monospace" font-size="8.5" fill="#8fa7c9">
+                  <text x="131" y="116">$ whoami</text>
+                  <text x="131" y="128" fill="#c9d5ea">hikemu</text>
+                  <text x="131" y="140">$ ./magic</text>
+                  <rect class="cursor" x="131" y="145" width="5" height="9" fill="#c9d5ea" />
+                </g>
+                <circle class="led" cx="224" cy="179" r="2" />
+                <rect x="200" y="176" width="14" height="2.5" rx="1" fill="#3a4357" />
+                <!-- cat -->
+                <g class="tail">
+                  <path d="M228 78 C 250 80, 256 102, 247 128" fill="none" stroke="#aeb5c3" stroke-width="10" stroke-linecap="round" />
+                  <path d="M228 78 C 250 80, 256 102, 247 128" fill="none" stroke="#d3d8e2" stroke-width="7" stroke-linecap="round" />
+                  <path d="M249 118 C 249 122, 248 126, 247 128" fill="none" stroke="#6f7789" stroke-width="7" stroke-linecap="round" />
+                </g>
+                <ellipse cx="188" cy="74" rx="50" ry="17" fill="#d3d8e2" stroke="#9aa2b2" stroke-width="1.4" />
+                <path d="M184 59 q5 7 0 14 M198 59 q5 7 0 14 M212 61 q4 6 0 12" fill="none" stroke="#a5adbc" stroke-width="2.2" stroke-linecap="round" />
+                <g class="head">
+                  <path class="ear-l" d="M117 54 L 114 28 L 134 41 Z" fill="#d3d8e2" stroke="#9aa2b2" stroke-width="1.4" stroke-linejoin="round" />
+                  <path d="M119 48 L 118 35 L 129 42 Z" fill="#e9a9b8" opacity=".55" />
+                  <path class="ear-r" d="M141 39 L 160 28 L 158 54 Z" fill="#d3d8e2" stroke="#9aa2b2" stroke-width="1.4" stroke-linejoin="round" />
+                  <path d="M146 41 L 156 35 L 155 48 Z" fill="#e9a9b8" opacity=".55" />
+                  <ellipse cx="137" cy="62" rx="25" ry="22" fill="#d3d8e2" stroke="#9aa2b2" stroke-width="1.4" />
+                  <path d="M131 42 q2 -4 6 -4 q4 0 6 4" fill="none" stroke="#a5adbc" stroke-width="2" stroke-linecap="round" />
+                  <g class="eyes" fill="none" stroke="#2b3242" stroke-width="2" stroke-linecap="round">
+                    <path d="M125 62 q4 -4 8 0" />
+                    <path d="M141 62 q4 -4 8 0" />
+                  </g>
+                  <path d="M133 70 q2 2 4 0 q2 2 4 0" fill="none" stroke="#2b3242" stroke-width="1.5" stroke-linecap="round" />
+                  <ellipse cx="124" cy="68" rx="3.6" ry="2" fill="#f0a3b4" opacity=".5" />
+                  <ellipse cx="150" cy="68" rx="3.6" ry="2" fill="#f0a3b4" opacity=".5" />
+                  <!-- headphones -->
+                  <path d="M113 60 C 110 26, 164 26, 161 60" fill="none" stroke="#2b3242" stroke-width="4.5" stroke-linecap="round" />
+                  <rect x="106" y="53" width="11" height="18" rx="5" fill="#3b4459" stroke="#22293a" />
+                  <rect x="157" y="53" width="11" height="18" rx="5" fill="#3b4459" stroke="#22293a" />
+                  <rect x="159.5" y="58" width="6" height="8" rx="2" class="cup-light" />
+                </g>
+                <ellipse cx="128" cy="88" rx="8" ry="5" fill="#dfe3ea" stroke="#9aa2b2" stroke-width="1.2" />
+                <ellipse cx="148" cy="88" rx="8" ry="5" fill="#dfe3ea" stroke="#9aa2b2" stroke-width="1.2" />
+                <g class="notes" fill="#9fb4d6">
+                  <path class="n1" d="M174 44 v-12 l7 -2 v10 a3 3 0 1 1 -1.5 -2.5 v-5.5 l-4 1.2 v9 a3 3 0 1 1 -1.5 -2.5z" />
+                  <path class="n2" d="M186 34 v-9 a2.6 2.6 0 1 1 -1.3 -2.2 v-5 l5 2 v2 l-3.7 -1.5z" />
+                </g>
+                <g class="z" font-family="JetBrains Mono Variable, ui-monospace, monospace" fill="#8d96a8" font-weight="600">
+                  <text class="z1" x="166" y="40" font-size="9">z</text>
+                  <text class="z2" x="174" y="30" font-size="12">z</text>
+                </g>
+              </svg>
+            </div>
+
+            <header class="card-head">
+              <h2 id="streams-title">Recent Streams</h2>
+              <div class="streams-tools">
+                <label class="search">
+                  <span class="ico" data-icon="search"></span>
+                  <span class="sr-only">Search recent streams</span>
+                  <input type="search" placeholder="Search.." data-stream-search autocomplete="off" spellcheck="false" />
+                </label>
+                <button class="icon-btn" type="button" data-stream-refresh aria-label="Refresh recent streams">
+                  <span class="ico" data-icon="refresh"></span>
+                </button>
+              </div>
+            </header>
+            <div class="streams-scroll" tabindex="0" aria-label="Recently played tracks">
+              <ol class="streams-list" data-streams></ol>
+            </div>
+            <p class="card-foot mono" data-streams-meta>&nbsp;</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============================== CRAFT ============================== -->
+      <section class="view" data-view="craft" aria-labelledby="craft-title" hidden>
+        <div class="card page-head">
+          <div>
+            <h1 id="craft-title" tabindex="-1">Craft</h1>
+            <p>things i've built, broken, and occasionally finished. pulled live from github, so it's always a little messy.</p>
+          </div>
+          <dl class="stats mono" data-craft-stats></dl>
+        </div>
+        <div class="repos" data-repos aria-live="polite"></div>
+      </section>
+
+      <!-- ============================== MORE ============================== -->
+      <section class="view" data-view="more" aria-labelledby="more-title" hidden>
+        <div class="card page-head">
+          <div>
+            <h1 id="more-title" tabindex="-1">More</h1>
+            <p>the rest of me, scattered across the internet. and some small details nobody asked for.</p>
+          </div>
+        </div>
+        <div class="more-grid">
+          <article class="card discord-card" data-discord-card aria-label="Discord presence"></article>
+          <div class="more-stack">
+            <article class="card elsewhere" aria-labelledby="elsewhere-title">
+              <header class="card-head"><h2 id="elsewhere-title">Elsewhere</h2></header>
+              <ul class="link-list" data-elsewhere></ul>
+            </article>
+            <article class="card steam-card" data-steam-card aria-label="Steam"></article>
+          </div>
+          <article class="card details" aria-labelledby="details-title">
+            <header class="card-head"><h2 id="details-title">Small Details</h2></header>
+            <dl class="spec mono" data-details></dl>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="foot mono">
+      <span>© <span data-year></span> hikemu</span>
+      <span class="sep" aria-hidden="true">·</span>
+      <span>computers used to feel like magic.</span>
+      <span class="sep" aria-hidden="true">·</span>
+      <span>no cookies, no trackers</span>
+    </footer>
+  </body>
+</html>
