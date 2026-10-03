@@ -2,22 +2,21 @@
 
 hikemu's corner of the internet. *computers used to feel like magic.*
 
-A personal profile site: live Discord presence, what I'm listening to, recent streams, the stuff I build, and a cat on a CRT.
-
-- **Home**: profile, now playing, about, recent streams
-- **Craft**: public GitHub repos, pulled live
-- **More**: Discord, Steam, links, small details
+A one-page personal profile: live Discord presence, what I'm listening to, recent streams, the stuff I build,
+and Sakamoto-san (fan art) keeping an eye on the music. Set entirely in JetBrains Mono Nerd Font.
 
 ## Stack
 
-Vite + vanilla TypeScript (no framework, ~14 KB JS gzipped), self-hosted Geist + JetBrains Mono, and a few
+Vite + vanilla TypeScript (no framework), self-hosted JetBrains Mono Nerd Font (subset, ~40 KB per weight, OFL), and a few
 Vercel functions in `/api` for anything that needs a secret.
 
 ```
 index.html          page markup (static, paints before any JS runs)
-src/main.ts         boot: router, pointer effects, lazy data
-src/views/*         profile/presence, music, about socials, craft, more
-src/lib/*           lanyard socket, tiny store, router, 1s ticker, dom helpers
+src/main.ts         boot: cat, pointer effects, views
+src/views/*         presence, music, socials, projects
+src/assets/         sakamoto.svg
+public/fonts/       JetBrains Mono Nerd Font (subset woff2 + OFL)
+src/lib/*           lanyard socket, tiny store, 1s ticker, dom helpers
 src/styles/main.css everything visual
 shared/*            config + types shared by browser and api
 api/*               Vercel functions (Web-standard GET handlers)
@@ -27,10 +26,10 @@ api/*               Vercel functions (Web-standard GET handlers)
 | --- | --- | --- |
 | Discord presence, activities, custom status | [Lanyard](https://github.com/Phineas/lanyard) WebSocket, REST fallback | realtime, reconnects with backoff |
 | Now playing | Lanyard (Spotify via Discord), else `/api/spotify` | progress bar is a pure CSS animation |
-| Recent streams | `/api/spotify` (Spotify Web API) | edge-cached 30s; also collects tracks seen live via Lanyard |
+| Recent streams | `/api/spotify` (Spotify Web API) + tracks seen live via Lanyard | merged, deduped, and kept in localStorage so a refresh never empties the list |
 | Repos | `/api/github` (cached 15 min), falls back to api.github.com | forks hidden |
 | Discord banner | `/api/discord` (dcdn.dstn.to) | optional; the dusk banner art stays otherwise |
-| Steam | `/api/steam` | optional, needs `STEAM_API_KEY` |
+| Steam | `/api/steam` | optional, needs `STEAM_API_KEY`; shown in the Steam icon's tooltip |
 
 Settings that aren't secrets (Discord ID, handles, timezone for the clock) live in `shared/config.ts`.
 

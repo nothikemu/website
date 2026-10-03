@@ -1,0 +1,89 @@
+<svg viewBox="0 0 170 196" width="170" height="196" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="sk-fur" cx=".42" cy=".3" r=".9">
+      <stop offset="0" stop-color="#2a2e38"/>
+      <stop offset=".55" stop-color="#17191f"/>
+      <stop offset="1" stop-color="#0d0e12"/>
+    </radialGradient>
+    <linearGradient id="sk-scarf" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e4473f"/>
+      <stop offset="1" stop-color="#b52a2a"/>
+    </linearGradient>
+  </defs>
+
+  <!-- shadow on the card edge -->
+  <ellipse cx="84" cy="186" rx="44" ry="3.5" fill="#000" opacity=".45"/>
+
+  <!-- tail, hanging over the card's edge -->
+  <g class="sk-tail">
+    <path d="M114 176 C 140 176, 150 160, 146 140 C 144 130, 150 122, 158 124" fill="none" stroke="#3b4150" stroke-width="13" stroke-linecap="round"/>
+    <path d="M114 176 C 140 176, 150 160, 146 140 C 144 130, 150 122, 158 124" fill="none" stroke="url(#sk-fur)" stroke-width="10" stroke-linecap="round"/>
+  </g>
+
+  <!-- body -->
+  <path d="M46 184 C 38 150, 46 118, 84 112 C 122 118, 130 150, 122 184 Z" fill="url(#sk-fur)" stroke="#3b4150" stroke-width="1.6"/>
+  <!-- haunch line -->
+  <path d="M112 150 C 122 160, 122 174, 116 184" fill="none" stroke="#2c313c" stroke-width="1.6" stroke-linecap="round"/>
+  <!-- front legs + paws -->
+  <path d="M64 140 L 63 182 M 104 140 L 105 182" stroke="#2c313c" stroke-width="1.4" stroke-linecap="round"/>
+  <ellipse cx="73" cy="183" rx="11" ry="5" fill="#15171c" stroke="#3b4150" stroke-width="1.4"/>
+  <ellipse cx="95" cy="183" rx="11" ry="5" fill="#15171c" stroke="#3b4150" stroke-width="1.4"/>
+  <path d="M84 150 L 84 182" stroke="#2c313c" stroke-width="1.4" stroke-linecap="round"/>
+
+  <!-- scarf (the red one Nano made) -->
+  <g class="sk-scarf">
+    <path d="M52 108 C 64 122, 104 122, 116 108 L 118 118 C 104 132, 64 132, 50 118 Z" fill="url(#sk-scarf)" stroke="#7c1d1d" stroke-width="1.2" stroke-linejoin="round"/>
+    <path d="M58 116 C 70 124, 98 124, 110 116" fill="none" stroke="#ff7b6e" stroke-width="1" opacity=".55"/>
+    <path class="sk-scarf-end" d="M100 124 L 96 154 L 104 152 L 108 157 L 112 125 Z" fill="url(#sk-scarf)" stroke="#7c1d1d" stroke-width="1.2" stroke-linejoin="round"/>
+    <path d="M100 157 l2 -4 l2 4 M106 157 l2 -4" stroke="#7c1d1d" stroke-width="1" fill="none"/>
+    <circle cx="106" cy="122" r="5.5" fill="#c9302e" stroke="#7c1d1d" stroke-width="1.2"/>
+  </g>
+
+  <!-- head -->
+  <g class="sk-head">
+    <path class="sk-ear-l" d="M44 70 L 40 26 C 52 32, 62 40, 70 50 Z" fill="url(#sk-fur)" stroke="#3b4150" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M47 60 L 45 36 C 52 40, 58 45, 63 51 Z" fill="#4a2a33"/>
+    <path class="sk-ear-r" d="M124 70 L 128 26 C 116 32, 106 40, 98 50 Z" fill="url(#sk-fur)" stroke="#3b4150" stroke-width="1.6" stroke-linejoin="round"/>
+    <path d="M121 60 L 123 36 C 116 40, 110 45, 105 51 Z" fill="#4a2a33"/>
+    <ellipse cx="84" cy="78" rx="44" ry="37" fill="url(#sk-fur)" stroke="#3b4150" stroke-width="1.6"/>
+    <!-- rim light so a black cat reads on a dark page -->
+    <path d="M48 62 C 56 46, 74 40, 92 41" fill="none" stroke="#5a6275" stroke-width="1.6" stroke-linecap="round" opacity=".7"/>
+
+    <!-- eyes: big, round, deadpan -->
+    <g class="sk-eyes">
+      <ellipse cx="66" cy="80" rx="12" ry="13" fill="#f3efe2"/>
+      <ellipse cx="102" cy="80" rx="12" ry="13" fill="#f3efe2"/>
+      <g class="sk-pupils">
+        <ellipse cx="67" cy="82" rx="5.4" ry="6.6" fill="#0b0c10"/>
+        <ellipse cx="101" cy="82" rx="5.4" ry="6.6" fill="#0b0c10"/>
+        <circle cx="69" cy="79" r="1.7" fill="#fff"/>
+        <circle cx="103" cy="79" r="1.7" fill="#fff"/>
+      </g>
+      <!-- heavy upper lids = that unimpressed sakamoto-san look -->
+      <g class="sk-lids" fill="#17191f">
+        <path d="M52 80 C 52 62, 80 62, 80 80 C 74 72, 58 72, 52 80 Z"/>
+        <path d="M88 80 C 88 62, 116 62, 116 80 C 110 72, 94 72, 88 80 Z"/>
+      </g>
+      <path d="M53 75 C 60 70, 72 70, 79 75 M 89 75 C 96 70, 108 70, 115 75" fill="none" stroke="#0b0c10" stroke-width="2" stroke-linecap="round"/>
+    </g>
+
+    <!-- nose + mouth -->
+    <path d="M81 94 L 87 94 L 84 97.5 Z" fill="#d98a96"/>
+    <path d="M84 97.5 L 84 100 M 78 101 C 80 103, 83 102, 84 100 C 85 102, 88 103, 90 101" fill="none" stroke="#7d8496" stroke-width="1.3" stroke-linecap="round"/>
+    <!-- whiskers -->
+    <g stroke="#6c7385" stroke-width="1" stroke-linecap="round" opacity=".8">
+      <path d="M58 96 L 34 92 M 58 100 L 33 101"/>
+      <path d="M110 96 L 134 92 M 110 100 L 135 101"/>
+    </g>
+  </g>
+
+  <!-- music notes (playing) and z's (idle) -->
+  <g class="sk-notes" fill="#c9d5ea">
+    <path class="n1" d="M136 50 v-13 l9 -2.5 v11 a3.3 3.3 0 1 1 -1.7 -2.8 v-5.6 l-5.6 1.6 v9.6 a3.3 3.3 0 1 1 -1.7 -2.8z"/>
+    <path class="n2" d="M148 30 v-10 a2.8 2.8 0 1 1 -1.4 -2.4 v-5.4 l5.6 2.2 v2.2 l-4.2 -1.7z"/>
+  </g>
+  <g class="sk-z" fill="#8d96a8" font-family="JetBrainsMono Nerd Font, monospace" font-weight="700">
+    <text class="z1" x="134" y="48" font-size="11">z</text>
+    <text class="z2" x="144" y="34" font-size="15">z</text>
+  </g>
+</svg>

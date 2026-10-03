@@ -18,20 +18,7 @@ export const icons = {
   steam: i(
     '<path fill="currentColor" d="M11.98 2A10 10 0 0 0 2.03 11.2l5.35 2.21a2.8 2.8 0 0 1 1.6-.5h.16l2.38-3.45v-.05a3.77 3.77 0 1 1 3.77 3.77h-.09l-3.4 2.42v.13a2.83 2.83 0 0 1-5.6.56L2.4 14.73A10 10 0 1 0 11.98 2Zm-5.7 15.17-1.23-.5a2.12 2.12 0 1 0 1.16-2.9l1.27.52a1.56 1.56 0 1 1-1.2 2.88Zm12.08-7.83a2.51 2.51 0 1 0-5.02 0 2.51 2.51 0 0 0 5.02 0Zm-4.4 0a1.89 1.89 0 1 1 3.78 0 1.89 1.89 0 0 1-3.78 0Z"/>',
   ),
-  monitor: stroke('<rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/>'),
-  phone: stroke('<rect x="7" y="2.5" width="10" height="19" rx="2.5"/><path d="M11 18.5h2"/>'),
-  globe: stroke('<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>'),
-  clock: stroke('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'),
-  search: stroke('<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>'),
-  refresh: stroke('<path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/>'),
-  star: stroke('<path d="m12 3.5 2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.9l-5.2 2.7 1-5.8-4.3-4.1 5.9-.9z"/>'),
-  fork: stroke('<circle cx="6" cy="5" r="2"/><circle cx="18" cy="5" r="2"/><circle cx="12" cy="19" r="2"/><path d="M6 7v1a3 3 0 0 0 3 3h6a3 3 0 0 0 3-3V7M12 11v6"/>'),
-  arrow: stroke('<path d="M7 17 17 7M8 7h9v9"/>'),
   image: stroke('<rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/>'),
-  copy: stroke('<rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/>'),
-  check: stroke('<path d="m5 12 5 5 9-10"/>'),
-  gamepad: stroke('<path d="M6 9h12a4 4 0 0 1 3.9 4.9l-.8 3.3a2.5 2.5 0 0 1-4.3 1.1L15 16H9l-1.8 2.3a2.5 2.5 0 0 1-4.3-1.1l-.8-3.3A4 4 0 0 1 6 9Z"/><path d="M8 11.5v3M6.5 13h3M15.5 12.5h.01M17.5 14h.01"/>'),
-  sparkle: i('<path fill="currentColor" d="M12 2c.4 4.6 2.4 6.9 7 7.4v.2c-4.6.5-6.6 2.8-7 7.4h-.2c-.4-4.6-2.4-6.9-7-7.4v-.2c4.6-.5 6.6-2.8 7-7.4z"/>'),
 };
 
 export type IconName = keyof typeof icons;

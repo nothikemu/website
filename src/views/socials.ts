@@ -1,10 +1,11 @@
 import { LINKS, SITE } from '../../shared/config';
-import { $, h, svg } from '../lib/dom';
+import type { SteamResponse } from '../../shared/types';
+import { $, getJSON, h, svg } from '../lib/dom';
 import { icons, type IconName } from '../lib/icons';
 import { mainActivities, STATUS_LABEL } from '../lib/lanyard';
-import { watch, type State } from '../lib/store';
+import { set, watch, type State } from '../lib/store';
 import { ago } from '../lib/time';
-import { visibleRepos } from './craft';
+import { visibleRepos } from './projects';
 
 type Key = 'github' | 'discord' | 'x' | 'steam';
 
@@ -46,7 +47,7 @@ export function preview(key: Key, s: State): { title: string; handle: string; li
       const st = s.steam.status === 'ok' ? s.steam.data : null;
       const prof = st?.profile;
       const lines = prof
-        ? [prof.game ? `in-game: ${prof.game}` : prof.state ? 'online' : 'offline']
+        ? [prof.game ? `in-game: ${prof.game}` : prof.state ? 'online' : 'offline', ...(st?.recent?.[0] ? [`recently: ${st.recent[0].name}`] : [])]
         : ['games, mostly unfinished ones'];
       return { title: 'Steam', handle: SITE.steamVanity, lines };
     }
@@ -56,7 +57,7 @@ export function preview(key: Key, s: State): { title: string; handle: string; li
 function fill(tip: HTMLElement, key: Key, s: State) {
   const p = preview(key, s);
   const head = h('strong', {}, p.status ? h('span', { class: 'dot', 'data-status': p.status }) : null, p.title);
-  tip.replaceChildren(head, h('span', { class: 'mono' }, p.handle), ...p.lines.map((l) => h('span', { class: 'tip-line' }, l)));
+  tip.replaceChildren(head, h('span', { class: 'handle-line' }, p.handle), ...p.lines.map((l) => h('span', { class: 'tip-line' }, l)));
 }
 
 export function initSocials() {
@@ -73,4 +74,20 @@ export function initSocials() {
     ul.append(li);
   }
   watch(['presence', 'lanyard', 'repos', 'steam'], (s) => tips.forEach((tip, key) => fill(tip, key, s)));
+
+  // steam presence only lives in its tooltip; fetch it when someone shows interest
+  const steam = ul.querySelector('[data-key="steam"]');
+  let asked = false;
+  const ask = () => {
+    if (asked) return;
+    asked = true;
+    getJSON<SteamResponse>('/api/steam')
+      .then((data) => {
+        if (typeof data?.configured !== 'boolean') throw new Error('bad payload');
+        set('steam', { status: 'ok', data });
+      })
+      .catch(() => set('steam', { status: 'error' }));
+  };
+  steam?.addEventListener('pointerenter', ask);
+  steam?.addEventListener('focusin', ask);
 }

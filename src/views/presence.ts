@@ -1,7 +1,6 @@
 import { SITE } from '../../shared/config';
 import type { DiscordProfile } from '../../shared/types';
-import { $, $$, getJSON, h, setText, svg, swapImage } from '../lib/dom';
-import { icons } from '../lib/icons';
+import { $, $$, getJSON, h, setText, swapImage } from '../lib/dom';
 import {
   assetUrl,
   avatarUrl,
@@ -50,9 +49,7 @@ export function activityRow(a: LanyardActivity): HTMLElement {
 }
 
 function fallbackIcon() {
-  const f = h('span', { class: 'act-fallback' });
-  f.append(svg(icons.gamepad));
-  return f;
+  return h('span', { class: 'act-fallback nf', 'aria-hidden': 'true' }, '\uF11B');
 }
 
 /** Keeps every "12:34 elapsed" on the page ticking off the shared 1s timer. */
@@ -93,19 +90,17 @@ function renderProfile(p: LanyardPresence | null, state: ReturnType<typeof getSt
   // where am i online from
   const platforms = $('[data-platforms]');
   if (platforms) {
-    const on: [boolean, 'monitor' | 'phone' | 'globe', string][] = [
-      [p.active_on_discord_desktop, 'monitor', 'desktop'],
-      [p.active_on_discord_mobile, 'phone', 'mobile'],
-      [p.active_on_discord_web, 'globe', 'web'],
+    const on: [boolean, string, string][] = [
+      [p.active_on_discord_desktop, '\uF108', 'desktop'],
+      [p.active_on_discord_mobile, '\uF10B', 'mobile'],
+      [p.active_on_discord_web, '\uF0AC', 'web'],
     ];
     const active = on.filter(([v]) => v);
-    const list = active.length ? active : [[true, 'monitor', 'desktop'] as const];
+    const list = active.length ? active : [[true, '\uF108', 'desktop'] as [boolean, string, string]];
     platforms.replaceChildren(
-      ...list.map(([, icon, label]) => {
-        const s = h('span', { class: 'ico', title: active.length ? `on discord ${label}` : 'offline', 'data-status': active.length ? status : 'offline' });
-        s.append(svg(icons[icon]));
-        return s;
-      }),
+      ...list.map(([, glyph, label]) =>
+        h('span', { class: 'nf', title: active.length ? `on discord ${label}` : 'offline', 'data-status': active.length ? status : 'offline' }, glyph),
+      ),
     );
     platforms.setAttribute('aria-label', active.length ? `Active on ${active.map(([, , l]) => l).join(', ')}` : 'Not active');
   }
