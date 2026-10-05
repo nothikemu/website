@@ -133,10 +133,16 @@ export default async function RequirementsPage({ params, searchParams }: { param
         ) : (
           <TableShell>
             <div className="overflow-x-auto">
-              <table className="w-full min-w-[960px] border-collapse text-xs">
+              <table className="w-full min-w-[1180px] table-fixed border-collapse text-xs">
+                <colgroup>
+                  <col className="w-[240px]" />
+                  {COLS.map((c) => (
+                    <col key={c.key} />
+                  ))}
+                </colgroup>
                 <thead>
                   <tr className="border-b border-border bg-bg-subtle text-left text-2xs tracking-wide text-fg-subtle uppercase">
-                    <th className="sticky left-0 w-[260px] bg-bg-subtle px-3 py-2 font-medium">Requirement</th>
+                    <th className="sticky left-0 z-10 bg-bg-subtle px-3 py-2 font-medium">Requirement</th>
                     {COLS.map((c) => (
                       <th key={c.key} className="border-l border-border px-3 py-2 font-medium">
                         {c.label}
@@ -149,7 +155,7 @@ export default async function RequirementsPage({ params, searchParams }: { param
                     const cell = (k: string) => links.filter((l) => (k === "impl" ? l.type === "commit" || l.type === "task" : l.type === k));
                     return (
                       <tr key={r.id} className="align-top">
-                        <td className="sticky left-0 bg-surface px-3 py-2">
+                        <td className="sticky left-0 z-10 border-r border-border bg-surface px-3 py-2">
                           <Link href={`${base}/requirements/${r.number}`} className="block hover:text-accent">
                             <span className="font-mono text-fg-subtle">{r.ref}</span> <VerificationBadge value={r.verification} />
                             <span className="mt-1 line-clamp-2 block text-[13px] text-fg">{r.title}</span>

@@ -96,24 +96,22 @@ export function CommandPalette({
   const project = projects.find((p) => p.slug === projectSlug);
   const projectById = useMemo(() => new Map(projects.map((p) => [p.id, p])), [projects]);
 
-  useEffect(() => {
+  const [prevOpen, setPrevOpen] = useState(open);
+  if (prevOpen !== open) {
+    setPrevOpen(open);
     if (!open) {
       setQuery("");
       setHits([]);
       setPeople([]);
     }
-  }, [open]);
+  }
 
   useEffect(() => {
     const q = query.trim();
-    if (q.length < 2) {
-      setHits([]);
-      setPeople([]);
-      return;
-    }
+    if (q.length < 2) return;
     const id = ++seq.current;
-    setLoading(true);
     const t = setTimeout(async () => {
+      setLoading(true);
       try {
         const res = await api<{ hits: Hit[]; people: Person[] }>("GET", `/api/v1/search?q=${encodeURIComponent(q)}&limit=20`);
         if (id === seq.current) {
@@ -139,6 +137,7 @@ export function CommandPalette({
   };
 
   const base = project ? `/project/${project.slug}` : null;
+  const searching = query.trim().length >= 2;
   const item = "flex h-9 cursor-default items-center gap-2.5 rounded-md px-2.5 text-sm text-fg-muted data-[selected=true]:bg-surface-2 data-[selected=true]:text-fg [&_svg]:size-4 [&_svg]:shrink-0 [&_svg]:text-fg-subtle";
   const group = "px-1.5 pb-1 [&_[cmdk-group-heading]]:px-2.5 [&_[cmdk-group-heading]]:pt-2.5 [&_[cmdk-group-heading]]:pb-1.5 [&_[cmdk-group-heading]]:text-2xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:tracking-wide [&_[cmdk-group-heading]]:text-fg-subtle [&_[cmdk-group-heading]]:uppercase";
 
@@ -166,7 +165,7 @@ export function CommandPalette({
                 {query.trim().length >= 2 && !loading ? "No results. Try a reference like REQ-004 or a file name." : "Type to search."}
               </Command.Empty>
 
-              {query.trim().length >= 2 && hits.length > 0 ? (
+              {searching && hits.length > 0 ? (
                 <Command.Group heading="Results" className={group}>
                   {hits.map((h) => {
                     const p = h.projectId ? projectById.get(h.projectId) : null;
@@ -181,7 +180,7 @@ export function CommandPalette({
                   })}
                 </Command.Group>
               ) : null}
-              {query.trim().length >= 2 && people.length > 0 ? (
+              {searching && people.length > 0 ? (
                 <Command.Group heading="People" className={group}>
                   {people.map((u) => (
                     <Command.Item key={u.id} value={`person-${u.id}`} onSelect={() => go(`/dashboard`)} className={item}>

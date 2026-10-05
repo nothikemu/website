@@ -79,7 +79,7 @@ export async function traceabilityMatrix(actor: Actor, ref: string) {
   const byReq = new Map<string, { type: string; ref: string; title: string; status: string | null; url: string }[]>();
   for (const o of others) {
     const d = described.get(`${o.type}:${o.id}`);
-    if (d) byReq.set(o.req, [...(byReq.get(o.req) ?? []), d]);
+    if (d && !(byReq.get(o.req) ?? []).some((x) => x.url === d.url && x.ref === d.ref)) byReq.set(o.req, [...(byReq.get(o.req) ?? []), d]);
   }
   return { access, rows: reqs.map((r) => ({ requirement: r, links: byReq.get(r.id) ?? [] })) };
 }

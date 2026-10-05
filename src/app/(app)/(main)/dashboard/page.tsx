@@ -163,7 +163,7 @@ export default async function DashboardPage() {
                   ))}
                 </ul>
               ) : (
-                <p className="px-3 py-4 text-sm text-fg-subtle">You're all caught up.</p>
+                <p className="px-3 py-4 text-sm text-fg-subtle">You&apos;re all caught up.</p>
               )}
             </Panel>
 

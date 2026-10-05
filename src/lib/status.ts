@@ -36,7 +36,7 @@ export const VERIFICATION: Record<string, Meta> = {
   failing: { label: "Failing", tone: "red" },
   in_progress: { label: "In verification", tone: "amber" },
   untested: { label: "Untested", tone: "neutral" },
-  not_applicable: { label: "By analysis", tone: "blue" },
+  not_applicable: { label: "Non-test method", tone: "blue" },
 };
 export const DECISION_STATUS: Record<string, Meta> = {
   proposed: { label: "Proposed", tone: "amber" },

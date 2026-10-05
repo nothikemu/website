@@ -16,8 +16,8 @@
     "format:check": "prettier --check .",
     "db:generate": "drizzle-kit generate",
     "db:migrate": "tsx scripts/migrate.ts",
-    "db:seed": "tsx scripts/seed.ts",
-    "db:reset-demo": "tsx scripts/seed.ts --reset",
+    "db:seed": "NODE_OPTIONS=--conditions=react-server tsx scripts/seed.ts",
+    "db:reset-demo": "NODE_OPTIONS=--conditions=react-server tsx scripts/seed.ts --reset",
     "db:studio": "drizzle-kit studio",
     "test": "vitest run",
     "test:watch": "vitest"

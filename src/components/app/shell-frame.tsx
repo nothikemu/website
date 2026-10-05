@@ -41,7 +41,11 @@ export function ShellFrame({
   const pending = useRef<{ key: string; at: number } | null>(null);
   const projectSlug = /^\/project\/([^/]+)/.exec(pathname)?.[1];
 
-  useEffect(() => setDrawer(false), [pathname]);
+  const [prevPath, setPrevPath] = useState(pathname);
+  if (prevPath !== pathname) {
+    setPrevPath(pathname);
+    setDrawer(false);
+  }
 
   const onKey = useCallback(
     (e: KeyboardEvent) => {

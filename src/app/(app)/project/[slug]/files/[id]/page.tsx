@@ -124,7 +124,7 @@ export default async function FileDetailPage({ params, searchParams }: { params:
                       </Link>
                     </div>
                   ) : null}
-                  <FilePreview project={project.slug} fileId={d.file.id} versionId={viewing.id} kind={d.preview} name={d.file.name} metadata={viewing.metadata} />
+                  <FilePreview key={viewing.id} project={project.slug} fileId={d.file.id} versionId={viewing.id} kind={d.preview} name={d.file.name} metadata={viewing.metadata} />
                 </section>
               )}
 

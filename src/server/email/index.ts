@@ -1,6 +1,7 @@
 import "server-only";
 import { env } from "@/server/env";
 import { logger } from "@/server/observability/logger";
+import type { Transporter } from "nodemailer";
 
 export type Email = { to: string; subject: string; text: string };
 
@@ -25,7 +26,7 @@ class ConsoleMailer implements Mailer {
 }
 
 class SmtpMailer implements Mailer {
-  private transport: Promise<import("nodemailer").Transporter>;
+  private transport: Promise<Transporter>;
   constructor(url: string) {
     this.transport = import("nodemailer").then((m) => m.createTransport(url));
   }

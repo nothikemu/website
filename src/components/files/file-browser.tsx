@@ -191,7 +191,7 @@ export function FileBrowser({
                   <td className="px-2">
                     <RowMenu
                       items={[
-                        { icon: <Download />, label: "Download", onSelect: () => (window.location.href = `${base}/files/${f.id}/download`) },
+                        { icon: <Download />, label: "Download", onSelect: () => download(`${base}/files/${f.id}/download`) },
                         ...(canWrite
                           ? [
                               { icon: <Pencil />, label: "Rename", onSelect: () => setRename({ kind: "file" as const, id: f.id, name: f.name }) },
@@ -284,6 +284,15 @@ export function FileBrowser({
       </Dialog>
     </div>
   );
+}
+
+function download(url: string) {
+  const a = document.createElement("a");
+  a.href = url;
+  a.rel = "noopener";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
 }
 
 function RowMenu({ items }: { items: ({ icon: React.ReactNode; label: string; onSelect: () => unknown; danger?: boolean } | null)[] }) {

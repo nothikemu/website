@@ -37,7 +37,7 @@ export default async function InvitePage({ params }: { params: Promise<{ token: 
           )
         ) : (
           <p className="text-sm text-fg-muted">
-            You're signed in as <span className="font-mono text-fg">{user.email}</span>. Sign in with the invited address to accept.
+            You&apos;re signed in as <span className="font-mono text-fg">{user.email}</span>. Sign in with the invited address to accept.
           </p>
         )
       ) : (

@@ -123,12 +123,21 @@ export async function linksFor(projectId: string, projectSlug: string, entity: E
       : { link: l, other: { type: l.sourceType, id: l.sourceId }, direction: "incoming" as const },
   );
   const described = await describeEntities(projectId, projectSlug, others.map((o) => o.other));
+  const seen = new Set<string>();
   return others
     .map((o) => {
       const d = described.get(`${o.other.type}:${o.other.id}`);
       return d ? { ...d, linkId: o.link.id, relation: o.link.relation, direction: o.direction } : null;
     })
-    .filter(Boolean) as LinkView[];
+    .filter((l): l is LinkView => {
+      // One row per related entity; prefer the more specific relation over a plain reference.
+      if (!l) return false;
+      const k = `${l.type}:${l.id}`;
+      if (seen.has(k)) return false;
+      seen.add(k);
+      return true;
+    })
+    .sort((a, b) => (a.relation === "references" ? 1 : 0) - (b.relation === "references" ? 1 : 0));
 }
 
 const TYPE_ALIASES: Record<string, EntityType> = {

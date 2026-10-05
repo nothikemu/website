@@ -24,7 +24,6 @@ export function FilePreview({ project, fileId, versionId, kind, name, metadata }
   const textual = kind === "text" || kind === "markdown" || kind === "csv";
   useEffect(() => {
     if (!textual) return;
-    setText(null);
     fetch(`${base}/content?version=${versionId}`)
       .then(async (r) => (r.ok ? setText(await r.json()) : setErr((await r.json()).error?.message ?? "Preview failed")))
       .catch(() => setErr("Preview failed"));
