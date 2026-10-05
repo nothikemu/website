@@ -1,5 +1,5 @@
 // Test environment — isolated database and storage directory.
-process.env.NODE_ENV = "test";
+(process.env as Record<string, string>).NODE_ENV = "test";
 process.env.DATABASE_URL = process.env.TEST_DATABASE_URL ?? "postgres://forgebase:forgebase@localhost:5432/forgebase_test";
 process.env.AUTH_SECRET = "test-auth-secret-0123456789abcdef0123456789abcdef";
 process.env.ENCRYPTION_KEY = "test-encryption-key-0123456789abcdef0123456789";

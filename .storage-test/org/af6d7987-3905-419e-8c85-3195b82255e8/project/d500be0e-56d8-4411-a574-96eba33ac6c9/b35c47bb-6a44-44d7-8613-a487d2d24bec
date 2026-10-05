@@ -1,4 +1,0 @@
-int main() {
-  drive();
-  return 0;
-}

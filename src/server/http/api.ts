@@ -194,3 +194,42 @@ export function route<P>(opts: Options, handler: (ctx: AuthedContext<P>) => Prom
     });
   };
 }
+
+export function intParam(value: string, what = "Resource"): number {
+  const n = Number(value);
+  if (!Number.isInteger(n) || n < 1 || n > 1_000_000) throw new AppError(404, "not_found", `${what} not found`);
+  return n;
+}
+
+export function serializeCookie(c: { name: string; value: string; options: { httpOnly: boolean; secure: boolean; sameSite: string; path: string; expires: Date } }) {
+  const parts = [`${c.name}=${encodeURIComponent(c.value)}`, `Path=${c.options.path}`, `Expires=${c.options.expires.toUTCString()}`, `SameSite=${c.options.sameSite[0]!.toUpperCase()}${c.options.sameSite.slice(1)}`];
+  if (c.options.httpOnly) parts.push("HttpOnly");
+  if (c.options.secure) parts.push("Secure");
+  return parts.join("; ");
+}
+
+export function jsonWithCookies(data: unknown, cookies: Parameters<typeof serializeCookie>[0][], status = 200) {
+  const headers = new Headers({ "content-type": "application/json", "cache-control": "no-store" });
+  for (const c of cookies) headers.append("set-cookie", serializeCookie(c));
+  return new Response(JSON.stringify(data), { status, headers });
+}
+
+/** Strip sensitive fields before returning a user to any client. */
+export function publicUser(u: SessionUser) {
+  return {
+    id: u.id,
+    email: u.email,
+    emailVerified: Boolean(u.emailVerifiedAt),
+    username: u.username,
+    displayName: u.displayName,
+    avatarUrl: u.avatarUrl,
+    bio: u.bio,
+    company: u.company,
+    location: u.location,
+    website: u.website,
+    timezone: u.timezone,
+    hasPassword: Boolean(u.passwordHash),
+    isDemo: u.isDemo,
+    createdAt: u.createdAt,
+  };
+}

@@ -18,29 +18,30 @@ import { askForge } from "@/server/ai/forge";
 import { db } from "@/server/db";
 import { organizations } from "@/server/db/schema";
 import { eq } from "drizzle-orm";
+import * as v from "@/lib/validation";
 
 describe("end-to-end service workflow", () => {
   it("runs a realistic engineering workflow", async () => {
     const owner = await makeUser("owner");
     const { org, project } = await makeOrgWithProject(owner);
 
-    const m1 = await createMilestone(owner, project.slug, { title: "Prototype", description: null, dueDate: "2026-12-01" });
-    const req = await createRequirement(owner, project.slug, { title: "Carry 20 kg payload", description: "Robot must transport 20 kg.", rationale: null, priority: "must", status: "approved", verificationMethod: "test" });
-    const test = await createTest(owner, project.slug, { name: "Drivetrain load test", criteria: "500 N minimum", expected: "No structural failure", requirements: [req.number] });
-    await recordRun(owner, project.slug, test.number, { status: "failed", actual: "Bracket yielded at 410 N", notes: null, measurements: [{ name: "Peak load", value: 410, unit: "N", min: 500 }] });
+    const m1 = await createMilestone(owner, project.slug, v.createMilestoneSchema.parse({ title: "Prototype", description: null, dueDate: "2026-12-01" }));
+    const req = await createRequirement(owner, project.slug, v.createRequirementSchema.parse({ title: "Carry 20 kg payload", description: "Robot must transport 20 kg.", rationale: null, priority: "must", status: "approved", verificationMethod: "test" }));
+    const test = await createTest(owner, project.slug, v.createTestSchema.parse({ name: "Drivetrain load test", criteria: "500 N minimum", expected: "No structural failure", requirements: [req.number] }));
+    await recordRun(owner, project.slug, test.number, v.createTestRunSchema.parse({ status: "failed", actual: "Bracket yielded at 410 N", notes: null, measurements: [{ name: "Peak load", value: 410, unit: "N", min: 500 }] }));
     let reqs = await listRequirements(owner, project.slug);
     expect(reqs.requirements[0]!.verification).toBe("failing");
 
-    const issue = await createIssue(owner, project.slug, { title: "Front bracket yields under load", description: "See TEST-001 and REQ-001", status: "open", priority: "high", labels: ["mechanical"] });
-    const dec = await createDecision(owner, project.slug, { title: "Use differential drive", decision: "Differential drive", alternatives: [{ name: "Mecanum", pros: null, cons: null }], status: "accepted", context: null, rationale: "Lower complexity", consequences: null });
-    const chg = await createChange(owner, project.slug, { title: "Reinforced front mounting bracket", reason: "Bracket failed during load testing (TEST-001)", items: [{ parameter: "thickness", from: "3 mm", to: "5 mm" }], status: "implemented", links: { issues: [issue.number], requirements: [req.number] } });
+    const issue = await createIssue(owner, project.slug, v.createIssueSchema.parse({ title: "Front bracket yields under load", description: "See TEST-001 and REQ-001", status: "open", priority: "high", labels: ["mechanical"] }));
+    const dec = await createDecision(owner, project.slug, v.createDecisionSchema.parse({ title: "Use differential drive", decision: "Differential drive", alternatives: [{ name: "Mecanum", pros: null, cons: null }], status: "accepted", context: null, rationale: "Lower complexity", consequences: null }));
+    const chg = await createChange(owner, project.slug, v.createChangeSchema.parse({ title: "Reinforced front mounting bracket", reason: "Bracket failed during load testing (TEST-001)", items: [{ parameter: "thickness", from: "3 mm", to: "5 mm" }], status: "implemented", links: { issues: [issue.number], requirements: [req.number] } }));
     expect(chg.number).toBe(1);
-    await recordRun(owner, project.slug, test.number, { status: "passed", actual: "No failure at 620 N", measurements: [] });
+    await recordRun(owner, project.slug, test.number, v.createTestRunSchema.parse({ status: "passed", actual: "No failure at 620 N", measurements: [] }));
     reqs = await listRequirements(owner, project.slug);
     expect(reqs.requirements[0]!.verification).toBe("verified");
     await updateIssue(owner, project.slug, issue.number, { status: "closed" });
 
-    const t = await createTask(owner, project.slug, { title: "Machine new bracket", status: "todo", priority: "medium", milestoneId: m1.id });
+    const t = await createTask(owner, project.slug, v.createTaskSchema.parse({ title: "Machine new bracket", status: "todo", priority: "medium", milestoneId: m1.id }));
     await updateTask(owner, project.slug, t.number, { status: "done" });
     const ms = await listMilestones(owner, project.slug);
     expect(ms.milestones[0]!.progress).toBe(1);
@@ -67,13 +68,13 @@ describe("end-to-end service workflow", () => {
     const restored = await restoreSnapshot(owner, project.slug, s1.number);
     expect(restored.restored).toBe(1);
 
-    await createEntry(owner, project.slug, { title: "Load test day", body: "Tested bracket. See TEST-001.", entryDate: "2026-10-05", tags: ["testing"] });
-    await createComment(owner, project.slug, { targetType: "issue", targetId: issue.id, body: "Fixed by CHANGE-001" });
+    await createEntry(owner, project.slug, v.createNotebookSchema.parse({ title: "Load test day", body: "Tested bracket. See TEST-001.", entryDate: "2026-10-05", tags: ["testing"] }));
+    await createComment(owner, project.slug, v.createCommentSchema.parse({ targetType: "issue", targetId: issue.id, body: "Fixed by CHANGE-001" }));
     const cs = await listComments(owner, project.slug, "issue", issue.id);
     expect(cs).toHaveLength(1);
 
     await db.update(organizations).set({ plan: "pro" }).where(eq(organizations.id, org.id));
-    const rel = await createRelease(owner, project.slug, { tag: "v0.1", name: "Prototype", notes: null, snapshotId: s1.id, firmwareCommit: null, publish: true });
+    const rel = await createRelease(owner, project.slug, v.createReleaseSchema.parse({ tag: "v0.1", name: "Prototype", notes: null, snapshotId: s1.id, firmwareCommit: null, publish: true }));
     expect(rel.status).toBe("published");
     expect(rel.manifest?.changes).toHaveLength(1);
 
