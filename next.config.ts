@@ -10,6 +10,7 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  devIndicators: false,
   serverExternalPackages: ["postgres", "nodemailer"],
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];

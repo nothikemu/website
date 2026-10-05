@@ -185,3 +185,13 @@ export async function toggleReaction(actor: Actor, ref: string, id: string, emoj
   else await db.insert(commentReactions).values({ commentId: id, userId: actor.id, emoji });
   return { active: !existing };
 }
+
+/** Data for a detail page's discussion: comments plus attachable project files. */
+export async function loadDiscussion(actor: Actor, ref: string, type: EntityType, id: string) {
+  const access = await requireProject(actor, ref, "project.read");
+  const [list, fileRows] = await Promise.all([
+    listComments(actor, ref, type, id),
+    db.select({ id: files.id, path: files.path }).from(files).where(and(eq(files.projectId, access.project.id), isNull(files.deletedAt))).orderBy(asc(files.path)).limit(500),
+  ]);
+  return { comments: list, files: fileRows, canComment: true };
+}
