@@ -68,6 +68,9 @@ export function env(): Env {
 
 export const isProd = () => env().NODE_ENV === "production";
 
+/** Secure cookies everywhere except plain-http local runs (e.g. the desktop build on localhost). */
+export const secureCookies = () => isProd() && env().APP_URL.startsWith("https://");
+
 export const oauthEnabled = () => ({
   github: Boolean(env().GITHUB_CLIENT_ID && env().GITHUB_CLIENT_SECRET),
   google: Boolean(env().GOOGLE_CLIENT_ID && env().GOOGLE_CLIENT_SECRET),

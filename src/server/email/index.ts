@@ -22,6 +22,9 @@ class ConsoleMailer implements Mailer {
     outbox.push(email);
     if (outbox.length > 100) outbox.shift();
     logger.info("email.console", { to: email.to, subject: email.subject, text: email.text });
+    // Portable desktop build: emails aren't sent, so show them in the console window.
+    if (process.env.FORGEBASE_SEED_AS_LIBRARY && process.env.NODE_ENV === "production")
+      console.log(`\n  ✉  Email to ${email.to}: ${email.subject}\n${email.text.replace(/^/gm, "     ")}\n`);
   }
 }
 

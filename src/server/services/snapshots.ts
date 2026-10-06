@@ -1,6 +1,6 @@
 import "server-only";
 import { and, desc, eq, inArray, isNotNull, isNull } from "drizzle-orm";
-import { db } from "@/server/db";
+import { db, type DbOrTx } from "@/server/db";
 import { files, fileVersions, snapshotEntries, snapshots, users } from "@/server/db/schema";
 import { requireProject, type Actor } from "@/server/authz";
 import { BadRequest, Conflict, NotFound } from "@/server/http/errors";
@@ -16,8 +16,8 @@ import { nextNumber, userSummary } from "./shared";
  */
 type Entry = { fileId: string; fileVersionId: string; path: string; number: number; size: number };
 
-async function entriesOf(snapshotId: string): Promise<Entry[]> {
-  return db
+async function entriesOf(snapshotId: string, tx: DbOrTx = db): Promise<Entry[]> {
+  return tx
     .select({
       fileId: snapshotEntries.fileId,
       fileVersionId: snapshotEntries.fileVersionId,
@@ -107,7 +107,7 @@ export async function createSnapshot(actor: Actor, ref: string, input: { name: s
       .where(eq(snapshots.projectId, access.project.id))
       .orderBy(desc(snapshots.number))
       .limit(1);
-    const prev = latest ? await entriesOf(latest.id) : [];
+    const prev = latest ? await entriesOf(latest.id, tx) : [];
     const summary = summarize(compareEntries(prev, live));
     if (latest && summary.added + summary.modified + summary.removed === 0)
       throw Conflict(`Nothing changed since Version ${latest.number}`);

@@ -3,7 +3,7 @@ import { and, eq, gt, lt } from "drizzle-orm";
 import { db } from "@/server/db";
 import { sessions, users, apiTokens } from "@/server/db/schema";
 import { randomToken, sha256 } from "@/server/crypto";
-import { isProd } from "@/server/env";
+import { secureCookies } from "@/server/env";
 
 export const SESSION_COOKIE = "fb_session";
 const SESSION_TTL_MS = 30 * 24 * 60 * 60 * 1000;
@@ -27,7 +27,7 @@ export function sessionCookie(token: string, expires: Date): CookieSpec {
   return {
     name: SESSION_COOKIE,
     value: token,
-    options: { httpOnly: true, secure: isProd(), sameSite: "lax", path: "/", expires },
+    options: { httpOnly: true, secure: secureCookies(), sameSite: "lax", path: "/", expires },
   };
 }
 

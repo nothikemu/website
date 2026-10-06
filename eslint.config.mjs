@@ -5,7 +5,11 @@ const config = [
   ...nextCoreWebVitals,
   ...nextTypescript,
   {
-    ignores: [".next/**", "node_modules/**", "drizzle/**", ".storage/**", "next-env.d.ts"],
+    ignores: [".next/**", "node_modules/**", "drizzle/**", ".storage/**", "next-env.d.ts", "dist/**"],
+  },
+  {
+    files: ["**/*.cjs"],
+    rules: { "@typescript-eslint/no-require-imports": "off" },
   },
   {
     rules: {

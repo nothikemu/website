@@ -240,7 +240,7 @@ const KICAD_PCB = `(kicad_pcb (version 20240108) (generator "pcbnew")
 )
 `;
 
-async function main() {
+export async function seedDemo() {
   if (process.env.NODE_ENV === "production" && process.env.SEED_ALLOW_PRODUCTION !== "1") throw new Error("Refusing to seed demo data in production");
   process.env.FORGEBASE_DISABLE_RATE_LIMIT = "1";
   await resetDemo();
@@ -623,15 +623,18 @@ async function main() {
   console.log(`  sign in: demo@forgebase.dev / ${DEMO_PASSWORD}  →  /project/${P}`);
 }
 
-const reset = process.argv.includes("--reset");
-(async () => {
-  try {
-    if (reset) await resetDemo();
-    if (!process.argv.includes("--reset-only")) await main();
-  } catch (e) {
-    console.error(e);
-    process.exitCode = 1;
-  } finally {
-    await closeDb();
-  }
-})();
+// CLI entry (npm run db:seed). The desktop bootstrap imports seedDemo() instead.
+if (!process.env.FORGEBASE_SEED_AS_LIBRARY) {
+  const reset = process.argv.includes("--reset");
+  (async () => {
+    try {
+      if (reset) await resetDemo();
+      if (!process.argv.includes("--reset-only")) await seedDemo();
+    } catch (e) {
+      console.error(e);
+      process.exitCode = 1;
+    } finally {
+      await closeDb();
+    }
+  })();
+}

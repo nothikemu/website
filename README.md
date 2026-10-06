@@ -24,6 +24,7 @@ Every artifact has history, context, ownership and relationships. That traceabil
 - [Storage](#storage)
 - [Authentication](#authentication)
 - [Deployment](#deployment)
+- [Portable Windows app](#portable-windows-app)
 - [API](#api)
 - [Security](#security)
 - [Testing](#testing)
@@ -191,6 +192,24 @@ To set up OAuth apps, use these callback URLs:
 4. Deploy. `/api/health` reports database and storage status for uptime checks.
 
 Any Node 20+ host also works (`npm run build && npm start`). Don't use `STORAGE_DRIVER=local` on serverless hosts. **Never run `db:seed` in production.** The script refuses unless `SEED_ALLOW_PRODUCTION=1` is set.
+
+## Portable Windows app
+
+A single-user copy that runs from a folder: no installer, no admin rights, no database server.
+
+```bash
+desktop/build.sh win      # → dist/Forgebase-win.zip  (needs Go, curl, zip)
+desktop/build.sh linux    # → dist/Forgebase-linux.zip
+```
+
+The zip contains `Forgebase.exe` (a small Go launcher), a portable Node.js runtime in `runtime/`, and the Next.js standalone server in `app/`. On launch it:
+
+- creates `%LOCALAPPDATA%\Forgebase` (or `~/.forgebase`) and generates secrets into `config.json`;
+- runs migrations against an embedded PostgreSQL (PGlite, `DATABASE_URL=pglite:<dir>`);
+- loads the demo workspace on first run;
+- serves on `http://localhost:3737` (or the next free port) and opens the browser.
+
+Only one copy runs per data folder (`running.json`); launching again reopens the browser. Emails are printed in the console window. End-user instructions are in [`desktop/README.txt`](desktop/README.txt). The test suite runs against PGlite with `TEST_DATABASE_URL=pglite:<dir>`.
 
 ## API
 
