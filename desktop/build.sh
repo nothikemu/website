@@ -2,6 +2,8 @@
 # Builds the portable Forgebase app (no installer, no admin rights).
 #
 #   desktop/build.sh [win|linux]      → dist/Forgebase-<target>.zip
+#                                       (win also: Forgebase-win-slim.zip, which
+#                                        downloads Node.js on first launch)
 #
 # Requires: Node 20+, npm deps installed, Go (for the launcher), curl, zip.
 set -euo pipefail
@@ -30,6 +32,11 @@ rm -rf "$OUT/app/node_modules/@electric-sql/pglite"
 mkdir -p "$OUT/app/node_modules/@electric-sql"
 cp -r node_modules/@electric-sql/pglite "$OUT/app/node_modules/@electric-sql/pglite"
 cp desktop/launcher.cjs "$OUT/app/launcher.cjs"
+# Source maps and type declarations aren't used at runtime; dropping them keeps
+# the slim download under 30 MB.
+find "$OUT/app" \( -name "*.map" -o -name "*.d.ts" -o -name "*.d.cts" -o -name "*.d.mts" \) -delete
+# Only the pg_trgm extension is loaded.
+find "$OUT/app/node_modules/@electric-sql/pglite/dist" -maxdepth 1 -name "*.tar.gz" ! -name "pg_trgm.tar.gz" -delete
 
 echo "▸ Bundling bootstrap (migrations + demo data)"
 node -e '
@@ -51,11 +58,18 @@ echo "▸ Runtime ($TARGET, Node $NODE_VERSION)"
 CACHE="${XDG_CACHE_HOME:-$HOME/.cache}/forgebase-desktop"
 mkdir -p "$CACHE"
 if [ "$TARGET" = "win" ]; then
-  ZIP="$CACHE/node-v$NODE_VERSION-win-x64.zip"
-  [ -f "$ZIP" ] || curl -fsSL -o "$ZIP" "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-win-x64.zip"
-  unzip -p "$ZIP" "node-v$NODE_VERSION-win-x64/node.exe" > "$OUT/runtime/node.exe"
-  unzip -p "$ZIP" "node-v$NODE_VERSION-win-x64/LICENSE" > "$OUT/runtime/LICENSE-node.txt"
-  (cd desktop/launcher-go && GOOS=windows GOARCH=amd64 go build -ldflags "-s -w" -o "../../$OUT/Forgebase.exe" .)
+  NAME="node-v$NODE_VERSION-win-x64"
+  URL="https://nodejs.org/dist/v$NODE_VERSION/$NAME.zip"
+  ZIP="$CACHE/$NAME.zip"
+  [ -f "$ZIP" ] || curl -fsSL -o "$ZIP" "$URL"
+  # Pin the official checksum: the slim build's launcher downloads this same file.
+  SHA="$(curl -fsSL "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt" | awk -v f="$NAME.zip" '$2 == f { print $1 }')"
+  [ -n "$SHA" ] || { echo "Could not fetch the Node.js checksum" >&2; exit 1; }
+  echo "$SHA  $ZIP" | sha256sum -c --quiet -
+  unzip -p "$ZIP" "$NAME/node.exe" > "$OUT/runtime/node.exe"
+  unzip -p "$ZIP" "$NAME/LICENSE" > "$OUT/runtime/LICENSE-node.txt"
+  LD="-s -w -X main.nodeZipURL=$URL -X main.nodeZipSHA256=$SHA -X main.nodeZipEntry=$NAME/node.exe"
+  (cd desktop/launcher-go && GOOS=windows GOARCH=amd64 go build -ldflags "$LD" -o "../../$OUT/Forgebase.exe" .)
 else
   cp "$(command -v node)" "$OUT/runtime/node"
   (cd desktop/launcher-go && go build -ldflags "-s -w" -o "../../$OUT/Forgebase" .)
@@ -64,6 +78,11 @@ fi
 cp desktop/README.txt "$OUT/README.txt"
 
 echo "▸ Packaging"
-rm -f "dist/Forgebase-$TARGET.zip"
+rm -f "dist/Forgebase-$TARGET.zip" "dist/Forgebase-$TARGET-slim.zip"
 (cd dist && zip -qr9 "Forgebase-$TARGET.zip" Forgebase)
 du -sh "$OUT" "dist/Forgebase-$TARGET.zip"
+if [ "$TARGET" = "win" ]; then
+  # Without the runtime; Forgebase.exe downloads it on first launch.
+  (cd dist && zip -qr9 "Forgebase-$TARGET-slim.zip" Forgebase -x "Forgebase/runtime/*")
+  du -sh "dist/Forgebase-$TARGET-slim.zip"
+fi

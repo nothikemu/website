@@ -198,11 +198,11 @@ Any Node 20+ host also works (`npm run build && npm start`). Don't use `STORAGE_
 A single-user copy that runs from a folder: no installer, no admin rights, no database server.
 
 ```bash
-desktop/build.sh win      # → dist/Forgebase-win.zip  (needs Go, curl, zip)
+desktop/build.sh win      # → dist/Forgebase-win.zip + Forgebase-win-slim.zip  (needs Go, curl, zip)
 desktop/build.sh linux    # → dist/Forgebase-linux.zip
 ```
 
-The zip contains `Forgebase.exe` (a small Go launcher), a portable Node.js runtime in `runtime/`, and the Next.js standalone server in `app/`. On launch it:
+The zip contains `Forgebase.exe` (a small Go launcher), a portable Node.js runtime in `runtime/`, and the Next.js standalone server in `app/`. The slim zip leaves out `runtime/`; `Forgebase.exe` then downloads the official Node.js build once on first launch, checking it against the SHA-256 pinned at build time. On launch it:
 
 - creates `%LOCALAPPDATA%\Forgebase` (or `~/.forgebase`) and generates secrets into `config.json`;
 - runs migrations against an embedded PostgreSQL (PGlite, `DATABASE_URL=pglite:<dir>`);

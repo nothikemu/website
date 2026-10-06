@@ -11,6 +11,9 @@ START
        "More info" → "Run anyway". (The app isn't code-signed.)
      - If the firewall asks, you can click Cancel: Forgebase only listens
        on your own computer (localhost).
+     - The smaller download doesn't include the Node.js runtime. The first
+       launch then fetches it once from nodejs.org (about 30 MB, internet
+       needed that one time) and keeps it in the "runtime" folder.
   3. A black window opens. The first launch takes a little longer while
      it creates the database and loads the demo project. Your browser
      then opens at http://localhost:3737.
@@ -21,6 +24,9 @@ SIGN IN
 
   This edition doesn't send real emails. Verification links, password
   resets and invitations are printed in the black window instead.
+
+  Double-clicking Forgebase.exe again while it's running just reopens the
+  browser tab.
 
 STOP
   Close the black window.
