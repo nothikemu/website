@@ -1,0 +1,236 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+ * Forgebase design tokens.
+ * Graphite neutrals with a single "hot metal" accent used sparingly.
+ * Status colours are reserved for status — never decoration.
+ */
+:root {
+  --bg: #f6f6f4;
+  --bg-subtle: #efefec;
+  --surface: #ffffff;
+  --surface-2: #f3f3f0;
+  --surface-3: #ebebe7;
+  --border: #e2e2dd;
+  --border-strong: #cfcfc8;
+  --fg: #17181b;
+  --fg-muted: #565a62;
+  --fg-subtle: #878b93;
+  --accent: #d4550f;
+  --accent-hover: #bd4a0b;
+  --accent-fg: #ffffff;
+  --accent-soft: #fbe9de;
+  --ring: #d4550f66;
+  --green: #1f8a5b;
+  --green-soft: #e1f3ea;
+  --red: #cd2b31;
+  --red-soft: #fbe4e4;
+  --amber: #a86a00;
+  --amber-soft: #fbefd6;
+  --blue: #2563c9;
+  --blue-soft: #e2ebfa;
+  --violet: #7646d4;
+  --violet-soft: #ede6fb;
+  --shadow: 0 1px 2px rgb(20 20 20 / 0.06), 0 8px 24px -12px rgb(20 20 20 / 0.18);
+  --grid-line: rgb(23 24 27 / 0.045);
+  color-scheme: light;
+}
+
+.dark {
+  --bg: #0c0d0f;
+  --bg-subtle: #101114;
+  --surface: #141518;
+  --surface-2: #1a1c20;
+  --surface-3: #212328;
+  --border: #25272c;
+  --border-strong: #33363d;
+  --fg: #e7e8ea;
+  --fg-muted: #a0a4ab;
+  --fg-subtle: #6c7078;
+  --accent: #f0712b;
+  --accent-hover: #ff8340;
+  --accent-fg: #140a04;
+  --accent-soft: #f0712b1f;
+  --ring: #f0712b80;
+  --green: #3fb68b;
+  --green-soft: #3fb68b1f;
+  --red: #ef5b5f;
+  --red-soft: #ef5b5f1f;
+  --amber: #e3a63b;
+  --amber-soft: #e3a63b1f;
+  --blue: #6b9ef5;
+  --blue-soft: #6b9ef51f;
+  --violet: #a98af0;
+  --violet-soft: #a98af01f;
+  --shadow: 0 1px 2px rgb(0 0 0 / 0.4), 0 12px 32px -12px rgb(0 0 0 / 0.6);
+  --grid-line: rgb(255 255 255 / 0.035);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --font-sans: var(--font-plex), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, "SF Mono", Menlo, monospace;
+
+  --color-bg: var(--bg);
+  --color-bg-subtle: var(--bg-subtle);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-fg: var(--accent-fg);
+  --color-accent-soft: var(--accent-soft);
+  --color-ring: var(--ring);
+  --color-green: var(--green);
+  --color-green-soft: var(--green-soft);
+  --color-red: var(--red);
+  --color-red-soft: var(--red-soft);
+  --color-amber: var(--amber);
+  --color-amber-soft: var(--amber-soft);
+  --color-blue: var(--blue);
+  --color-blue-soft: var(--blue-soft);
+  --color-violet: var(--violet);
+  --color-violet-soft: var(--violet-soft);
+
+  --text-2xs: 0.6875rem;
+  --text-2xs--line-height: 1rem;
+  --text-xs: 0.75rem;
+  --text-xs--line-height: 1.05rem;
+  --text-sm: 0.8125rem;
+  --text-sm--line-height: 1.25rem;
+  --text-base: 0.875rem;
+  --text-base--line-height: 1.4rem;
+
+  --radius-sm: 3px;
+  --radius-md: 5px;
+  --radius-lg: 7px;
+
+  --animate-fade-in: fade-in 140ms ease-out;
+  --animate-slide-up: slide-up 160ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "ss01", "ss02";
+  }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    line-height: 1.4rem;
+  }
+  ::selection {
+    background: var(--accent-soft);
+    color: var(--fg);
+  }
+  * {
+    border-color: var(--border);
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 1px;
+  }
+  input, textarea, select, button {
+    font: inherit;
+  }
+  code, kbd, samp, pre {
+    font-family: var(--font-mono);
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 10px; border: 3px solid transparent; background-clip: content-box; }
+  ::-webkit-scrollbar-track { background: transparent; }
+}
+
+@layer components {
+  .prose-forge {
+    @apply prose prose-sm max-w-none;
+    --tw-prose-body: var(--fg);
+    --tw-prose-headings: var(--fg);
+    --tw-prose-links: var(--fg);
+    --tw-prose-bold: var(--fg);
+    --tw-prose-counters: var(--fg-subtle);
+    --tw-prose-bullets: var(--fg-subtle);
+    --tw-prose-hr: var(--border);
+    --tw-prose-quotes: var(--fg-muted);
+    --tw-prose-quote-borders: var(--border-strong);
+    --tw-prose-code: var(--fg);
+    --tw-prose-pre-code: var(--fg);
+    --tw-prose-pre-bg: var(--surface-2);
+    --tw-prose-th-borders: var(--border-strong);
+    --tw-prose-td-borders: var(--border);
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }
+  .prose-forge :where(a) {
+    text-decoration-color: var(--border-strong);
+    text-underline-offset: 3px;
+  }
+  .prose-forge :where(a):hover {
+    text-decoration-color: var(--accent);
+  }
+  .prose-forge :where(code):not(:where(pre code)) {
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 0.05rem 0.3rem;
+    font-size: 0.8em;
+    font-weight: 450;
+  }
+  .prose-forge :where(code):not(:where(pre code))::before,
+  .prose-forge :where(code):not(:where(pre code))::after {
+    content: none;
+  }
+  .prose-forge :where(pre) {
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    font-size: 0.78rem;
+  }
+  .prose-forge :where(h1, h2, h3) {
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+  .prose-forge :where(h2) {
+    font-size: 0.95rem;
+    margin-top: 1.4em;
+  }
+  .prose-forge :where(h3) {
+    font-size: 0.875rem;
+  }
+  .prose-forge :where(table) {
+    font-size: 0.8rem;
+  }
+  .prose-forge :where(img) {
+    border-radius: 5px;
+    border: 1px solid var(--border);
+  }
+  .bg-grid {
+    background-image:
+      linear-gradient(var(--grid-line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+}
