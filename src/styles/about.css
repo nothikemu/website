@@ -1,0 +1,123 @@
+.about-block + .about-block {
+  margin-top: var(--s-4);
+  padding-top: var(--s-4);
+  border-top: 1px solid var(--line);
+}
+.about-block h3 {
+  margin-bottom: var(--s-1);
+  font-size: var(--t-secondary);
+  font-weight: var(--w-semibold);
+  line-height: var(--lh-head);
+}
+.about-block p {
+  max-width: 65ch;
+  color: var(--fog);
+}
+.me {
+  color: var(--paper);
+  font-weight: var(--w-semibold);
+}
+.heart {
+  margin-left: var(--s-1);
+  color: var(--heart);
+  font-size: var(--t-meta);
+  font-weight: var(--w-regular);
+}
+
+/* interests, laid out like `eza --icons` */
+.interests {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(144px, 1fr));
+  gap: var(--s-2) var(--s-4);
+  margin-top: var(--s-3);
+}
+.interests li {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  color: var(--paper);
+}
+.interests .nf {
+  color: var(--dusk);
+}
+
+.socials {
+  display: flex;
+  gap: var(--s-1);
+  margin-right: calc(var(--s-2) * -1);
+}
+.socials .icon-btn {
+  font-size: var(--t-h3);
+}
+.socials [data-key='github'] .icon-btn:hover {
+  color: #f0f2f5;
+}
+.socials [data-key='discord'] .icon-btn:hover {
+  color: #8b96ff;
+}
+.socials [data-key='steam'] .icon-btn:hover {
+  color: #9fcfff;
+}
+.socials .badge {
+  position: absolute;
+  right: 9px;
+  bottom: 9px;
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--slate);
+  border-radius: 50%;
+  background: var(--status);
+  pointer-events: none;
+}
+
+.about-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--s-4);
+}
+.buttons {
+  display: grid;
+  flex: 1 1 280px;
+  min-width: 0;
+  grid-template-columns: repeat(auto-fill, 88px);
+  gap: var(--s-2);
+  max-width: calc(4 * 88px + 3 * var(--s-2));
+}
+.buttons a,
+.buttons img {
+  display: block;
+  width: 88px;
+  height: 31px;
+}
+.buttons a {
+  transition: opacity var(--m-150) ease;
+}
+.buttons a:hover {
+  opacity: 0.8;
+}
+.here {
+  display: grid;
+  justify-items: end;
+  color: var(--dusk);
+  font-size: var(--t-meta);
+  line-height: var(--lh-meta);
+}
+.here b {
+  color: var(--fog);
+  font-size: var(--t-h3);
+  font-weight: var(--w-medium);
+  line-height: var(--lh-head);
+  font-variant-numeric: tabular-nums;
+}
+
+@media (max-width: 767.98px) {
+  .buttons {
+    flex-basis: 100%;
+    max-width: none;
+  }
+  .here {
+    justify-items: start;
+  }
+}

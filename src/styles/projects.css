@@ -1,0 +1,129 @@
+.head-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s-1);
+  min-height: var(--hit);
+  color: var(--fog);
+  text-decoration-color: transparent;
+}
+
+/* like `ls -l`: name, what it is, language, stars, last push */
+.repo {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(120px, 200px) minmax(0, 1fr) 112px 40px 80px 16px;
+  align-items: center;
+  gap: var(--s-4);
+  min-height: 52px;
+  padding: var(--s-3) var(--s-4);
+  border-bottom: 1px solid var(--line);
+  transition: background-color var(--m-150) ease;
+}
+.repo:last-child {
+  border-bottom: 0;
+}
+.repo:hover,
+.repo:focus-within {
+  background: rgba(28, 35, 56, 0.7);
+}
+.repo-name {
+  display: flex;
+  align-items: center;
+  gap: var(--s-1);
+  min-width: 0;
+  color: var(--paper);
+  font-weight: var(--w-medium);
+}
+.repo-name span:last-child {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.repo-name .nf {
+  color: var(--dusk);
+}
+/* the whole row is the link */
+.repo-name::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+.repo-name:focus-visible {
+  outline: none;
+}
+.repo:has(.repo-name:focus-visible) {
+  outline: 2px solid var(--moon);
+  outline-offset: -2px;
+}
+.repo-desc {
+  overflow: hidden;
+  color: var(--fog);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.repo-desc.none {
+  color: var(--dusk);
+}
+.repo-lang,
+.repo-stars,
+.repo-when {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  color: var(--dusk);
+  font-size: var(--t-meta);
+  line-height: var(--lh-meta);
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+.repo-when {
+  justify-content: flex-end;
+}
+.repo-go {
+  color: var(--dusk);
+  font-size: var(--t-meta);
+  transition: color var(--m-150) ease;
+}
+.repo:hover .repo-go,
+.repo:focus-within .repo-go {
+  color: var(--moon);
+}
+.lang-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--lang, var(--dusk));
+}
+.repo-stars .nf {
+  min-width: 0;
+}
+
+@media (max-width: 767.98px) {
+  .repo {
+    grid-template-columns: minmax(0, 1fr) auto 16px;
+    grid-template-areas:
+      'name when go'
+      'desc desc desc'
+      'lang lang lang';
+    gap: var(--s-1) var(--s-3);
+  }
+  .repo-name {
+    grid-area: name;
+  }
+  .repo-when {
+    grid-area: when;
+  }
+  .repo-desc {
+    grid-area: desc;
+  }
+  .repo-lang {
+    grid-area: lang;
+  }
+  .repo-go {
+    grid-area: go;
+  }
+  .repo-stars {
+    display: none;
+  }
+}

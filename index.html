@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>hikemu</title>
-    <meta name="description" content="computers used to feel like magic. hikemu's corner of the internet: music, linux, games and weird little things." />
-    <meta name="theme-color" content="#0c1018" />
+    <meta name="description" content="computers used to feel like magic. hikemu's corner of the internet: what i'm listening to, what i'm up to, and the things i build." />
+    <meta name="theme-color" content="#0e1220" />
     <meta name="color-scheme" content="dark" />
     <meta property="og:title" content="hikemu" />
     <meta property="og:description" content="computers used to feel like magic." />
@@ -20,30 +20,28 @@
     <script type="module" src="/src/main.ts"></script>
   </head>
   <body>
-    <a class="skip" href="#main">skip to content</a>
-    <div class="grain" aria-hidden="true"></div>
+    <a class="skip" href="#main">Skip to content</a>
 
     <main id="main" class="page">
       <h1 class="sr-only">hikemu</h1>
 
-      <!-- ========================= top row ========================= -->
-      <div class="row row-top">
-        <!-- profile -->
-        <article class="card profile" aria-label="Profile">
+      <div class="grid">
+        <!-- ================= profile ================= -->
+        <article class="panel profile" aria-labelledby="profile-name">
           <div class="banner" aria-hidden="true">
             <svg class="banner-art" viewBox="0 0 600 200" preserveAspectRatio="xMidYMid slice">
               <defs>
                 <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0" stop-color="#1a2133" />
-                  <stop offset="1" stop-color="#111624" />
+                  <stop offset="0" stop-color="#1b2236" />
+                  <stop offset="1" stop-color="#121729" />
                 </linearGradient>
                 <radialGradient id="moonFill" cx=".35" cy=".35" r=".8">
-                  <stop offset="0" stop-color="#eef1f6" />
-                  <stop offset="1" stop-color="#8f9bb0" />
+                  <stop offset="0" stop-color="#f1efe8" />
+                  <stop offset="1" stop-color="#9aa3b8" />
                 </radialGradient>
                 <radialGradient id="halo" cx=".5" cy=".5" r=".5">
-                  <stop offset="0" stop-color="#c9d3e6" stop-opacity=".16" />
-                  <stop offset="1" stop-color="#c9d3e6" stop-opacity="0" />
+                  <stop offset="0" stop-color="#cfd6ea" stop-opacity=".16" />
+                  <stop offset="1" stop-color="#cfd6ea" stop-opacity="0" />
                 </radialGradient>
                 <pattern id="dots" width="6" height="6" patternUnits="userSpaceOnUse">
                   <circle cx="3" cy="3" r=".9" fill="#fff" />
@@ -63,25 +61,24 @@
               <g class="layer-far">
                 <circle cx="470" cy="70" r="90" fill="url(#halo)" />
                 <circle cx="470" cy="70" r="40" fill="url(#moonFill)" mask="url(#crescent)" opacity=".92" />
-                <g fill="#dfe5f0">
+                <g fill="#e3e8f2">
                   <circle cx="380" cy="34" r="1" opacity=".7" />
                   <circle cx="545" cy="128" r="1.1" opacity=".5" />
                   <circle cx="300" cy="22" r=".8" opacity=".5" />
                   <circle cx="566" cy="30" r=".9" opacity=".6" />
                   <circle cx="244" cy="54" r=".7" opacity=".4" />
                   <circle cx="410" cy="120" r=".8" opacity=".35" />
-                  <path class="twinkle" d="M352 82c.3 3.4 1.8 5 5.2 5.4v.2c-3.4.4-4.9 2-5.2 5.4h-.2c-.3-3.4-1.8-5-5.2-5.4v-.2c3.4-.4 4.9-2 5.2-5.4z" />
-                  <path class="twinkle t2" d="M532 76c.2 2.3 1.2 3.4 3.5 3.6v.2c-2.3.2-3.3 1.3-3.5 3.6h-.2c-.2-2.3-1.2-3.4-3.5-3.6v-.2c2.3-.2 3.3-1.3 3.5-3.6z" />
+                  <path d="M352 82c.3 3.4 1.8 5 5.2 5.4v.2c-3.4.4-4.9 2-5.2 5.4h-.2c-.3-3.4-1.8-5-5.2-5.4v-.2c3.4-.4 4.9-2 5.2-5.4z" opacity=".8" />
+                  <path d="M532 76c.2 2.3 1.2 3.4 3.5 3.6v.2c-2.3.2-3.3 1.3-3.5 3.6h-.2c-.2-2.3-1.2-3.4-3.5-3.6v-.2c2.3-.2 3.3-1.3 3.5-3.6z" opacity=".6" />
                 </g>
-                <text x="586" y="186" text-anchor="end" class="hex">6d 61 67 69 63</text>
               </g>
-              <g class="layer-near" fill="none" stroke="#080b12" stroke-linecap="round">
+              <g class="layer-near" fill="none" stroke="#080b14" stroke-linecap="round">
                 <path d="M-10 66 Q 70 92 131 61" stroke-width="1.4" />
                 <path d="M-10 84 Q 74 104 137 77" stroke-width="1.2" />
                 <path d="M178 61 Q 390 108 620 50" stroke-width="1.4" />
                 <path d="M172 77 Q 384 122 620 70" stroke-width="1.2" />
                 <path d="M178 61 Q 300 70 620 112" stroke-width="1" opacity=".7" />
-                <g fill="#080b12" stroke="none">
+                <g fill="#080b14" stroke="none">
                   <rect x="150" y="38" width="7" height="180" rx="1" />
                   <rect x="126" y="56" width="56" height="5" rx="1" />
                   <rect x="132" y="73" width="44" height="4" rx="1" />
@@ -95,155 +92,163 @@
           </div>
 
           <div class="profile-body">
-            <div class="avatar-wrap">
-              <img class="avatar" data-avatar src="https://github.com/nothikemu.png?size=192" alt="hikemu's avatar" width="84" height="84" decoding="async" fetchpriority="high" />
-              <img class="avatar-deco" data-avatar-deco alt="" width="100" height="100" hidden />
+            <div class="avatar">
+              <img data-avatar src="https://github.com/nothikemu.png?size=192" alt="hikemu's avatar" width="88" height="88" decoding="async" fetchpriority="high" />
+              <img class="avatar-deco" data-avatar-deco alt="" width="104" height="104" hidden />
               <span class="status-dot" data-status-dot data-status="offline" role="img" aria-label="Discord status: offline"></span>
             </div>
 
-            <div class="clock-wrap">
-              <span class="chip clock" title="hikemu's local time"><span class="nf" aria-hidden="true">&#xF017;</span><time data-clock>--:--</time></span>
-              <span class="tz" data-tz></span>
-            </div>
+            <p class="local">
+              <span class="local-time"><span class="nf" aria-hidden="true">&#xF017;</span><span class="sr-only">hikemu's local time:</span><time data-clock>--:--</time></span>
+              <span class="local-diff" data-tz></span>
+            </p>
 
-            <h2 class="name">hikemu<span class="name-deco" aria-hidden="true"><span class="nf">&#xF186;</span> ᶻᶻ</span></h2>
+            <h2 class="name" id="profile-name">hikemu<span class="nf name-glyph" aria-hidden="true">&#xF186;</span></h2>
             <p class="handle">
               <span>@nothikemu</span>
-              <span class="platforms" data-platforms aria-label="Active on"><span class="nf" aria-hidden="true">&#xF108;</span></span>
+              <span class="platforms" data-platforms></span>
             </p>
 
-            <div class="custom-status" data-custom-status hidden></div>
+            <p class="custom-status" data-custom-status hidden></p>
 
-            <p class="bio">
-              <span class="motto">computers used to feel like magic.</span>
-              i make things, break things, fix things, and spend probably too much time on the internet.
-            </p>
+            <div class="bio">
+              <p class="motto">computers used to feel like magic.</p>
+              <p>i make things, break things, fix things, and spend probably too much time on the internet.</p>
+            </div>
 
             <div class="activity" data-activity aria-live="polite"></div>
           </div>
         </article>
 
-        <!-- now playing -->
-        <article class="card now" data-now data-state="idle" aria-labelledby="now-title">
-          <header class="card-head">
-            <h2 id="now-title"><span class="nf spotify-ico" aria-hidden="true">&#xF1BC;</span>Listening to Spotify</h2>
-            <span class="live" data-now-live hidden>
+        <!-- ================= now playing ================= -->
+        <article class="panel now" data-now data-state="idle" aria-labelledby="now-title">
+          <header class="panel-head">
+            <h2 id="now-title"><span class="nf spotify-mark" aria-hidden="true">&#xF1BC;</span>Listening to Spotify</h2>
+            <p class="live" data-now-live hidden>
               <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
-              <span data-now-source>live</span>
-            </span>
+              <span data-now-state>live</span>
+            </p>
           </header>
           <div class="now-body">
-            <a class="art" data-now-link tabindex="-1" aria-hidden="true">
-              <span class="art-empty" data-icon="image"></span>
-              <img data-now-art alt="" width="104" height="104" decoding="async" hidden />
+            <a class="now-art" data-now-art-link tabindex="-1" aria-hidden="true">
+              <span class="now-art-empty" data-icon="image"></span>
+              <img data-now-art alt="" width="112" height="112" decoding="async" hidden />
             </a>
             <div class="now-info">
-              <p class="now-title"><a data-now-title-link><span data-now-title>Not listening</span></a></p>
-              <p class="now-sub" data-now-sub>No song currently playing.</p>
+              <p class="now-title"><a data-now-link><span data-now-title>Not listening</span></a></p>
+              <p class="now-artist" data-now-artist>No song currently playing.</p>
               <p class="now-album" data-now-album></p>
               <div class="progress" data-now-progress hidden>
                 <div class="bar" role="progressbar" aria-label="Playback progress" aria-valuemin="0" aria-valuemax="100" data-now-bar>
                   <span class="fill" data-now-fill></span>
                 </div>
-                <div class="times"><span data-now-elapsed>0:00</span><span data-now-duration>0:00</span></div>
+                <p class="times"><span data-now-elapsed>0:00</span><span data-now-duration>0:00</span></p>
               </div>
             </div>
           </div>
-          <div class="zzz" aria-hidden="true"><span>z</span><span>z</span><span>Z</span></div>
           <p class="sr-only" aria-live="polite" data-now-announce></p>
         </article>
-      </div>
 
-      <!-- ========================= middle row ========================= -->
-      <div class="row row-mid">
-        <!-- about -->
-        <article class="card about" aria-labelledby="about-title">
-          <div class="about-cat" data-cat-watermark aria-hidden="true"></div>
-          <header class="card-head">
+        <!-- ================= about ================= -->
+        <section class="panel about" aria-labelledby="about-title">
+          <header class="panel-head">
             <h2 id="about-title">About Me</h2>
-            <ul class="socials" aria-label="Elsewhere" data-socials></ul>
+            <ul class="socials" data-socials aria-label="hikemu elsewhere"></ul>
           </header>
 
-          <section class="about-block">
+          <div class="about-block">
             <h3>Who am I?</h3>
             <p>
-              i'm <span class="me">hikemu</span> - a <span class="u">hobby developer</span> who likes computers, linux, music, games, and making
-              weird little things on the internet.
+              i'm <span class="me">hikemu</span>, a hobby developer who likes computers, linux, music, games, and making weird little
+              things on the internet.
             </p>
-          </section>
+          </div>
 
-          <section class="about-block">
+          <div class="about-block">
             <h3>My Interests <span class="heart" aria-hidden="true">&lt;3</span></h3>
             <p>
-              i love computers. not "tech", <em>computers</em>: the humming, booting, breaking kind that still feel like a magic trick. also
-              games, music, and wasting <span class="dim">(all of my)</span> time on the internet <span class="smile">:3</span>
+              i love computers. not "tech", computers: the humming, booting, breaking kind that still feel like a magic trick. also
+              games, music, and wasting (all of my) time on the internet :3
             </p>
             <ul class="interests" aria-label="Interests">
-              <li data-note="yes, btw"><span class="nf" aria-hidden="true">&#xF17C;</span>linux</li>
-              <li data-note="mostly random things"><span class="nf" aria-hidden="true">&#xF121;</span>code</li>
-              <li data-note="screwdriver: owned"><span class="nf" aria-hidden="true">&#xF2DB;</span>hardware</li>
-              <li data-note="backlog &gt; free time"><span class="nf" aria-hidden="true">&#xF11B;</span>games</li>
-              <li data-note="see the list →"><span class="nf" aria-hidden="true">&#xF025;</span>music</li>
-              <li data-note="too much of it"><span class="nf" aria-hidden="true">&#xF0AC;</span>the internet</li>
-              <li data-note="if it boots, it ships"><span class="nf" aria-hidden="true">&#xF0C3;</span>experiments</li>
+              <li><span class="nf" aria-hidden="true">&#xF17C;</span>linux</li>
+              <li><span class="nf" aria-hidden="true">&#xF121;</span>code</li>
+              <li><span class="nf" aria-hidden="true">&#xF2DB;</span>hardware</li>
+              <li><span class="nf" aria-hidden="true">&#xF11B;</span>games</li>
+              <li><span class="nf" aria-hidden="true">&#xF025;</span>music</li>
+              <li><span class="nf" aria-hidden="true">&#xF0AC;</span>the internet</li>
+              <li><span class="nf" aria-hidden="true">&#xF0C3;</span>experiments</li>
+              <li><span class="nf" aria-hidden="true">&#xEEED;</span>nichijou</li>
             </ul>
-          </section>
-
-          <div class="about-foot">
-            <div class="buttons" aria-label="88x31 buttons">
-              <span class="b88 b-site" title="you are here"><b>hkmu</b><i>.me</i></span>
-              <span class="b88 b-linux" title="linux inside"><i>powered by</i><b><span class="nf">&#xF31A;</span> LINUX</b></span>
-              <span class="b88 b-lanyard" title="discord presence via lanyard"><i>lanyard</i><b data-b-lanyard-state>● ···</b></span>
-              <span class="b88 b-cat" title="sakamoto-san approves"><b>=^.^=</b><i>cat approved</i></span>
-              <span class="b88 b-cookie" title="no cookies, no analytics, no trackers"><b>NO</b><i>cookies</i></span>
-              <span class="b88 b-view" title="any browser is fine honestly"><i>best viewed w/</i><b>EYES</b></span>
-              <span class="b88 b-nerd" title="this whole site is set in jetbrains mono nerd font"><b><span class="nf">&#xE795;</span> nerd</b><i>font inside</i></span>
-              <span class="b88 b-magic" title="computers used to feel like magic"><b>magic</b><i>inside</i></span>
-            </div>
-            <p class="here" title="time you've spent on this page">here for<b data-here>00:00</b></p>
           </div>
-        </article>
 
-        <!-- recent streams -->
-        <article class="card streams" aria-labelledby="streams-title">
-          <div class="mascot" data-mascot data-playing="false" aria-hidden="true"></div>
-          <header class="card-head">
+          <div class="about-block about-foot">
+            <ul class="buttons" aria-label="88x31 buttons">
+              <li><img src="/badges/hkmu.svg" alt="hkmu.me" width="88" height="31" loading="lazy" /></li>
+              <li>
+                <a href="https://kernel.org" target="_blank" rel="noopener"><img src="/badges/linux.svg" alt="powered by linux" width="88" height="31" loading="lazy" /></a>
+              </li>
+              <li>
+                <a href="https://github.com/Phineas/lanyard" target="_blank" rel="noopener"
+                  ><img src="/badges/lanyard.svg" alt="discord presence via lanyard" width="88" height="31" loading="lazy"
+                /></a>
+              </li>
+              <li>
+                <a href="https://www.nerdfonts.com" target="_blank" rel="noopener"><img src="/badges/nerdfonts.svg" alt="set in nerd fonts" width="88" height="31" loading="lazy" /></a>
+              </li>
+              <li><img src="/badges/sakamoto.svg" alt="sakamoto-san approved" width="88" height="31" loading="lazy" /></li>
+              <li><img src="/badges/cookies.svg" alt="no cookies, no trackers" width="88" height="31" loading="lazy" /></li>
+              <li><img src="/badges/browser.svg" alt="best viewed with any browser" width="88" height="31" loading="lazy" /></li>
+              <li><img src="/badges/magic.svg" alt="computers used to feel like magic" width="88" height="31" loading="lazy" /></li>
+            </ul>
+            <p class="here"><span>here for</span><b data-here>00:00</b></p>
+          </div>
+        </section>
+
+        <!-- ================= recent streams ================= -->
+        <section class="panel streams" aria-labelledby="streams-title">
+          <div class="sakamoto" data-sakamoto data-mood="asleep" aria-hidden="true"></div>
+          <header class="panel-head">
             <h2 id="streams-title">Recent Streams</h2>
             <div class="streams-tools">
               <label class="search">
-                <span class="nf" aria-hidden="true">&#xF002;</span>
-                <span class="sr-only">Search recent streams</span>
-                <input type="search" placeholder="Search.." data-stream-search autocomplete="off" spellcheck="false" />
+                <span class="search-label">Search</span>
+                <span class="search-field">
+                  <span class="nf" aria-hidden="true">&#xF002;</span>
+                  <input type="search" placeholder="song or artist" data-stream-search autocomplete="off" spellcheck="false" />
+                </span>
               </label>
-              <button class="icon-btn" type="button" data-stream-refresh aria-label="Refresh recent streams">
-                <span class="nf" aria-hidden="true">&#xF021;</span>
-              </button>
+              <div class="has-tip">
+                <button class="icon-btn" type="button" data-stream-refresh aria-label="Refresh streams" aria-describedby="tip-refresh">
+                  <span class="nf" aria-hidden="true">&#xF021;</span>
+                </button>
+                <span class="tip" role="tooltip" id="tip-refresh"><strong>Refresh streams</strong></span>
+              </div>
             </div>
           </header>
-          <div class="streams-scroll" tabindex="0" aria-label="Recently played tracks">
-            <ol class="streams-list" data-streams></ol>
+          <div class="well streams-scroll" tabindex="0" role="region" aria-label="Recently played songs">
+            <ol class="tracks" data-tracks aria-busy="true"></ol>
           </div>
-          <p class="card-foot" data-streams-meta>&nbsp;</p>
-        </article>
+          <p class="panel-foot" data-streams-meta aria-live="polite"></p>
+        </section>
+
+        <!-- ================= projects ================= -->
+        <section class="panel projects" aria-labelledby="projects-title">
+          <header class="panel-head">
+            <h2 id="projects-title">Projects</h2>
+            <a class="link head-link" href="https://github.com/nothikemu?tab=repositories" target="_blank" rel="noopener">
+              <span class="nf" aria-hidden="true">&#xF09B;</span><span data-repo-summary>View all on GitHub</span>
+            </a>
+          </header>
+          <div class="well">
+            <ul class="repos" data-repos aria-busy="true"></ul>
+          </div>
+        </section>
       </div>
 
-      <!-- ========================= projects ========================= -->
-      <article class="card projects" aria-labelledby="projects-title">
-        <header class="card-head">
-          <h2 id="projects-title">Projects</h2>
-          <a class="head-link" href="https://github.com/nothikemu?tab=repositories" target="_blank" rel="noopener">
-            <span class="nf" aria-hidden="true">&#xF09B;</span><span data-repo-summary>github.com/nothikemu</span><span class="nf" aria-hidden="true">&#xF08E;</span>
-          </a>
-        </header>
-        <ul class="repos" data-repos aria-live="polite"></ul>
-      </article>
-
       <footer class="foot">
-        <span>© <span data-year></span> hikemu</span>
-        <span class="sep" aria-hidden="true">·</span>
-        <span>computers used to feel like magic.</span>
-        <span class="sep" aria-hidden="true">·</span>
-        <span>no cookies, no trackers</span>
+        <p>© <span data-year></span> hikemu</p>
+        <p>computers used to feel like magic.</p>
       </footer>
     </main>
   </body>

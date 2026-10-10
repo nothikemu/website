@@ -1,0 +1,106 @@
+/* Design tokens. Source of truth: .ux-profile.md */
+
+@font-face {
+  font-family: 'JetBrainsMono Nerd Font';
+  src: url('/fonts/JetBrainsMonoNerdFont-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JetBrainsMono Nerd Font';
+  src: url('/fonts/JetBrainsMonoNerdFont-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'JetBrainsMono Nerd Font';
+  src: url('/fonts/JetBrainsMonoNerdFont-SemiBold.woff2') format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: dark;
+
+  /* colour */
+  --ink: #0e1220;
+  --slate: #151b2c;
+  --well: #10162a;
+  --raised: #1c2338;
+  --paper: #ebe7dd;
+  --fog: #a6acbb;
+  --dusk: #8a91a3;
+  --moon: #b3beff;
+  --heart: #f26d63;
+  --spotify: #1ed760;
+
+  --online: #23a55a;
+  --idle: #f0b232;
+  --dnd: #f23f43;
+  --offline: #80848e;
+
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.14);
+  --edge: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  --shadow: var(--edge), 0 16px 32px -24px rgba(0, 0, 0, 0.7);
+
+  /* type */
+  --font: 'JetBrainsMono Nerd Font', 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+  --t-meta: 0.75rem; /* 12 */
+  --t-secondary: 0.875rem; /* 14 */
+  --t-body: 1rem; /* 16 */
+  --t-h3: 1.125rem; /* 18 */
+  --t-h2: 1.25rem; /* 20 */
+  --t-h1: 1.5rem; /* 24 */
+  --w-regular: 400;
+  --w-medium: 500;
+  --w-semibold: 600;
+  --lh-tight: 1.2;
+  --lh-head: 1.25;
+  --lh-body: 1.55;
+  --lh-meta: 1.4;
+
+  /* space */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --s-12: 48px;
+
+  /* shape */
+  --r-panel: 16px;
+  --r-well: 12px;
+  --r-art: 8px;
+
+  /* viewport */
+  --vp-wide: 1280px;
+  --page: 1120px;
+  --hit: 44px;
+
+  /* motion */
+  --m-100: 100ms;
+  --m-150: 150ms;
+  --m-200: 200ms;
+  --m-300: 300ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in: cubic-bezier(0.7, 0, 0.84, 0);
+
+  /* pointer position -1..1, written by JS for user-driven parallax */
+  --px: 0;
+  --py: 0;
+}
+
+[data-status='online'] {
+  --status: var(--online);
+}
+[data-status='idle'] {
+  --status: var(--idle);
+}
+[data-status='dnd'] {
+  --status: var(--dnd);
+}
+[data-status='offline'] {
+  --status: var(--offline);
+}

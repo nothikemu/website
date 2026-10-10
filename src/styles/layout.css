@@ -1,0 +1,206 @@
+/* One page, the reference composition:
+     profile (5) | now playing (7)      <- Sakamoto sits in the gap under now playing
+     about   (6) | recent streams (6)
+     projects (12)                                                        */
+
+.page {
+  width: 100%;
+  max-width: calc(var(--page) + 2 * var(--s-6));
+  margin-inline: auto;
+  padding: var(--s-12) var(--s-6) 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--s-4);
+  align-items: start;
+}
+.profile {
+  grid-column: span 5;
+}
+.now {
+  grid-column: span 7;
+  /* room for Sakamoto between this panel and Recent Streams */
+  margin-bottom: 216px;
+}
+.about {
+  grid-column: span 6;
+  align-self: stretch;
+}
+.streams {
+  grid-column: span 6;
+  align-self: stretch;
+}
+.projects {
+  grid-column: span 12;
+}
+
+/* a panel is an L1 surface: border first, then a quiet edge highlight */
+.panel {
+  position: relative;
+  padding: var(--s-6);
+  border: 1px solid var(--line);
+  border-radius: var(--r-panel);
+  background: var(--slate);
+  box-shadow: var(--shadow);
+}
+
+.panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s-3);
+  min-height: var(--hit);
+  margin-bottom: var(--s-4);
+}
+.panel-head h2 {
+  display: flex;
+  align-items: center;
+  gap: var(--s-2);
+  font-size: var(--t-body);
+  font-weight: var(--w-semibold);
+  line-height: var(--lh-head);
+}
+.panel-foot {
+  min-height: calc(var(--t-meta) * var(--lh-meta));
+  margin-top: var(--s-3);
+  color: var(--dusk);
+  font-size: var(--t-meta);
+  line-height: var(--lh-meta);
+}
+
+/* lists and tables live in an inset well with hairline rows */
+.well {
+  border: 1px solid var(--line);
+  border-radius: var(--r-well);
+  background: var(--well);
+  overflow: hidden;
+}
+
+.foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--s-2) var(--s-4);
+  padding: var(--s-8) 0 var(--s-12);
+  color: var(--dusk);
+  font-size: var(--t-meta);
+  line-height: var(--lh-meta);
+}
+
+/* secondary button used by empty and error states */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  min-height: var(--hit);
+  padding: 0 var(--s-4);
+  border: 1px solid var(--line-strong);
+  border-radius: 10px;
+  background: var(--raised);
+  color: var(--paper);
+  font-size: var(--t-secondary);
+  font-weight: var(--w-medium);
+  cursor: pointer;
+  transition:
+    border-color var(--m-150) ease,
+    color var(--m-150) ease;
+}
+.btn:hover {
+  border-color: var(--moon);
+  color: var(--moon);
+}
+
+/* empty / error / filtered states inside a well */
+.state {
+  display: grid;
+  justify-items: center;
+  gap: var(--s-2);
+  padding: var(--s-8) var(--s-6);
+  text-align: center;
+}
+.state h3 {
+  font-size: var(--t-secondary);
+  font-weight: var(--w-semibold);
+  line-height: var(--lh-head);
+}
+.state p {
+  max-width: 40ch;
+  color: var(--fog);
+}
+.state .actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--s-2);
+  margin-top: var(--s-2);
+}
+
+/* static skeleton rows (no shimmer), shaped like the rows they stand in for */
+.skel {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+  min-height: 64px;
+  padding: var(--s-3);
+  border-bottom: 1px solid var(--line);
+}
+.skel:last-child {
+  border-bottom: 0;
+}
+.skel i {
+  display: block;
+  height: 12px;
+  border-radius: 4px;
+  background: var(--raised);
+}
+.skel .sq {
+  flex: none;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--r-art);
+}
+.skel .lines {
+  display: grid;
+  flex: 1;
+  gap: var(--s-2);
+}
+
+/* ----- narrow: one column, music stays near the top ----- */
+@media (max-width: 767.98px) {
+  .page {
+    padding: var(--s-4) var(--s-4) 0;
+  }
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--s-3);
+  }
+  .profile,
+  .now,
+  .about,
+  .streams,
+  .projects {
+    grid-column: auto;
+  }
+  .now {
+    margin-bottom: 0;
+  }
+  .streams {
+    order: 1;
+    margin-top: 168px;
+  }
+  .about {
+    order: 2;
+  }
+  .projects {
+    order: 3;
+  }
+  .panel {
+    padding: var(--s-4);
+  }
+  .foot {
+    padding-bottom: var(--s-8);
+  }
+}

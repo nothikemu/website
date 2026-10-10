@@ -1,0 +1,89 @@
+/* Sakamoto-san sits on the top edge of Recent Streams. The SVG's paws rest at y=192 of 230. */
+.sakamoto {
+  position: absolute;
+  z-index: 2;
+  right: var(--s-12);
+  bottom: calc(100% - 38px * 200 / 180);
+  width: 200px;
+}
+.sakamoto svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.sk-head {
+  transform-origin: 90px 120px;
+  transition: transform var(--m-200) var(--ease-out);
+}
+.sakamoto:hover .sk-head {
+  transform: rotate(-6deg);
+}
+
+/* his eyes follow the pointer (user-driven) */
+.sk-pupils {
+  transform: translate(calc(var(--px) * 3px), calc(var(--py) * 2px));
+  transition: transform var(--m-150) var(--ease-out);
+}
+.sk-eyes {
+  transform-origin: 90px 84px;
+  transition:
+    transform var(--m-100) var(--ease-in),
+    opacity var(--m-150) ease;
+}
+.sakamoto.blink .sk-eyes {
+  transform: scaleY(0.1);
+}
+
+/* asleep while nothing is playing; hovering wakes him up */
+.sk-sleep,
+.sk-z {
+  transition: opacity var(--m-150) ease;
+}
+.sakamoto[data-mood='asleep'] .sk-eyes {
+  opacity: 0;
+}
+.sakamoto[data-mood='asleep'] .sk-sleep,
+.sakamoto[data-mood='asleep'] .sk-z {
+  opacity: 1;
+}
+.sakamoto[data-mood='asleep']:hover .sk-eyes {
+  opacity: 1;
+}
+.sakamoto[data-mood='asleep']:hover .sk-sleep,
+.sakamoto[data-mood='asleep']:hover .sk-z {
+  opacity: 0;
+}
+
+/* live-activity loop: notes drift up only while music is playing */
+.sk-notes path {
+  opacity: 0;
+  transform-box: fill-box;
+}
+.sakamoto[data-mood='listening'] .sk-notes path {
+  animation: note 2400ms var(--ease-out) infinite;
+}
+.sakamoto[data-mood='listening'] .sk-notes .n2 {
+  animation-delay: 1200ms;
+}
+@keyframes note {
+  0% {
+    opacity: 0;
+    transform: translate(0, 6px);
+  }
+  30% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(8px, -12px);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .sakamoto {
+    right: var(--s-6);
+    width: 160px;
+    bottom: calc(100% - 38px * 160 / 180);
+  }
+}

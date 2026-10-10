@@ -1,0 +1,191 @@
+.streams {
+  display: flex;
+  flex-direction: column;
+}
+.streams .panel-head {
+  flex-wrap: wrap;
+  row-gap: var(--s-2);
+}
+.streams-tools {
+  display: flex;
+  flex: 0 1 auto;
+  align-items: center;
+  gap: var(--s-1);
+  min-width: 0;
+  margin-left: auto;
+}
+.search {
+  display: flex;
+  flex: 0 1 auto;
+  align-items: center;
+  gap: var(--s-2);
+  min-width: 0;
+}
+.search-label {
+  color: var(--fog);
+}
+.search-field {
+  display: flex;
+  align-items: center;
+  gap: var(--s-1);
+  flex: 0 1 176px;
+  width: 176px;
+  min-width: 96px;
+  height: var(--hit);
+  padding: 0 var(--s-3) 0 var(--s-2);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--well);
+  color: var(--dusk);
+  transition: border-color var(--m-150) ease;
+}
+.search-field:focus-within {
+  outline: 2px solid var(--moon);
+  outline-offset: 2px;
+}
+.search input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: var(--paper);
+  font-size: var(--t-secondary);
+}
+.search input::placeholder {
+  color: var(--dusk);
+}
+.search input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.streams-scroll {
+  flex: 1 1 0;
+  min-height: 336px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #2c3550 transparent;
+}
+
+.track {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--s-3);
+  min-height: 64px;
+  padding: var(--s-3);
+  border-bottom: 1px solid var(--line);
+  transition: background-color var(--m-150) ease;
+}
+.track:last-child {
+  border-bottom: 0;
+}
+.track:hover {
+  background: rgba(28, 35, 56, 0.7);
+}
+.track .cover {
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: var(--r-art);
+  background: var(--raised);
+}
+.track .cover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.t-main {
+  min-width: 0;
+}
+.t-main > * {
+  display: block;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.t-title {
+  color: var(--paper);
+  font-weight: var(--w-medium);
+}
+a.t-title {
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition: text-decoration-color var(--m-150) ease;
+}
+a.t-title:hover {
+  text-decoration-color: var(--line-strong);
+}
+.t-artist {
+  color: var(--dusk);
+}
+.t-meta {
+  display: grid;
+  justify-items: end;
+  gap: 2px;
+  color: var(--dusk);
+  font-size: var(--t-meta);
+  line-height: var(--lh-meta);
+  font-variant-numeric: tabular-nums;
+}
+.t-meta .nf {
+  color: var(--spotify);
+}
+.track.is-now {
+  background: linear-gradient(90deg, rgba(30, 215, 96, 0.07), transparent 70%);
+}
+.track.is-now .t-when {
+  color: var(--spotify);
+}
+.day {
+  padding: var(--s-2) var(--s-3);
+  border-bottom: 1px solid var(--line);
+  background: rgba(21, 27, 44, 0.6);
+  color: var(--dusk);
+  font-size: var(--t-meta);
+  line-height: var(--lh-meta);
+}
+
+@media (max-width: 767.98px) {
+  .streams .panel-head {
+    flex-wrap: wrap;
+  }
+  .streams-tools {
+    flex: 1 1 100%;
+  }
+  .search,
+  .search-field {
+    flex: 1;
+    width: auto;
+  }
+  /* narrow toolbar: the field keeps its accessible name, the word goes */
+  .search-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+  .streams-scroll {
+    flex: none;
+    min-height: 0;
+    max-height: 448px;
+  }
+}
+
+/* empty / error states fill the well and sit in its middle */
+.streams-scroll {
+  display: flex;
+  flex-direction: column;
+}
+.tracks {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.tracks > .state {
+  flex: 1;
+  align-content: center;
+}

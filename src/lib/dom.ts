@@ -54,3 +54,11 @@ export async function getJSON<T>(url: string, init?: RequestInit): Promise<T> {
   if (!res.ok && !(body && typeof body === 'object')) throw new Error(`${url}: ${res.status}`);
   return body;
 }
+
+/** A nerd font glyph, hidden from assistive tech. */
+export const nf = (glyph: string, cls = '') => h('span', { class: `nf ${cls}`.trim(), 'aria-hidden': 'true' }, glyph);
+
+/** Run `fn` only if `pending()` is still true after `ms`: loaders never flash for fast responses. */
+export function afterDelay(ms: number, pending: () => boolean, fn: () => void) {
+  window.setTimeout(() => pending() && fn(), ms);
+}
